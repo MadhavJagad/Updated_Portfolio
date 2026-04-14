@@ -241,10 +241,10 @@ function initNavShery() {
   //   Shery.imageEffect(".nav-image", { style: 1 });
   // }
 
-  // Shery.imageEffect(".nav-image", {
-  //   style: 2 /*OR 5 for different variant */,
-  //   debug: true,
-  // });
+  Shery.imageEffect(".nav-image", {
+    style: 2,
+    debug: true,
+  });
 }
 
 (function () {

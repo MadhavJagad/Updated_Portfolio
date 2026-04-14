@@ -1822,7 +1822,7 @@ nav {
 
 .skill-card-label .desc {
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 1rem;
   color: rgba(229, 231, 235, 0.45);
   line-height: 1.7;
   max-width: 280px;
@@ -1831,12 +1831,13 @@ nav {
 .skill-card-label .pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 1rem;
+  margin-top: 50px;
 }
 
 .skill-card-label .pill {
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: 1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.25rem 0.6rem;
