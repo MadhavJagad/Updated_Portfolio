@@ -4,19 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madhav Jagad — Full Stack Developer</title>
+    <title>Madhav — Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
+    <!-- <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" /> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sheryjs/dist/Shery.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.21/dist/lenis.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="loading">
 
     <!-- CURSOR -->
     <div id="cursor">
@@ -29,21 +25,17 @@
         <div class="loader-label">Loading</div>
         <h1>0</h1>
     </div>
-    <!-- Progress bar -->
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
 
-    <!-- ═══════════════════════════════════════════
-         FIXED FOOTER — sits behind all page content
-    ════════════════════════════════════════════ -->
+    <!-- FIXED FOOTER -->
     <footer id="site-footer">
-
-        <!-- Noise grain overlay -->
+        <!-- <canvas id="webgl"></canvas>
+        <div class="noise"></div> -->
         <div class="footer-grain"></div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <!-- Top: big CTA headline -->
+        <div class="footer-top-row">
             <div class="footer-top-area">
                 <div class="footer-eyebrow">Available for Work · 2025</div>
                 <h2 class="footer-big-title">
@@ -59,58 +51,35 @@
                     </svg>
                 </a>
             </div>
-            <!-- Video container -->
             <div class="video-container">
-                <video src="../Images/Orbit-Video.mp4" muted autoplay loop></video>
+                <video src="./Images/Orbit-Video.mp4" muted autoplay loop></video>
             </div>
         </div>
 
-        <!-- ── MARQUEE TICKER ── -->
         <div class="why-marquee" aria-hidden="true">
             <div class="why-marquee-track" id="whyMarqueeTrack">
-                <span>50% Faster Delivery</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>Full-Stack Ownership</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>Pixel-Perfect UI</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>Enterprise RBAC</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>GraphQL & REST APIs</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>Promoted Early</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>37+ Projects</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>React · Node.js · MongoDB</span>
-                <span class="why-marquee-dot">◆</span>
-                <!-- duplicate for seamless loop -->
-                <span>50% Faster Delivery</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>Full-Stack Ownership</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>Pixel-Perfect UI</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>Enterprise RBAC</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>GraphQL & REST APIs</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>Promoted Early</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>37+ Projects</span>
-                <span class="why-marquee-dot">◆</span>
-                <span>React · Node.js · MongoDB</span>
-                <span class="why-marquee-dot">◆</span>
+                <span>50% Faster Delivery</span><span class="why-marquee-dot">◆</span>
+                <span>Full-Stack Ownership</span><span class="why-marquee-dot">◆</span>
+                <span>Pixel-Perfect UI</span><span class="why-marquee-dot">◆</span>
+                <span>Enterprise RBAC</span><span class="why-marquee-dot">◆</span>
+                <span>GraphQL & REST APIs</span><span class="why-marquee-dot">◆</span>
+                <span>Promoted Early</span><span class="why-marquee-dot">◆</span>
+                <span>37+ Projects</span><span class="why-marquee-dot">◆</span>
+                <span>React · Node.js · MongoDB</span><span class="why-marquee-dot">◆</span>
+                <span>50% Faster Delivery</span><span class="why-marquee-dot">◆</span>
+                <span>Full-Stack Ownership</span><span class="why-marquee-dot">◆</span>
+                <span>Pixel-Perfect UI</span><span class="why-marquee-dot">◆</span>
+                <span>Enterprise RBAC</span><span class="why-marquee-dot">◆</span>
+                <span>GraphQL & REST APIs</span><span class="why-marquee-dot">◆</span>
+                <span>Promoted Early</span><span class="why-marquee-dot">◆</span>
+                <span>37+ Projects</span><span class="why-marquee-dot">◆</span>
+                <span>React · Node.js · MongoDB</span><span class="why-marquee-dot">◆</span>
             </div>
         </div>
 
-        <!-- Divider -->
         <div class="footer-rule"></div>
 
-        <!-- Bottom grid: info columns -->
         <div class="footer-grid">
-
-            <!-- Col 1: Logo + copy -->
             <div class="footer-col footer-col--brand">
                 <div class="footer-logo">
                     <span class="footer-logo-mark">M</span>
@@ -119,8 +88,6 @@
                 <p class="footer-tagline">Full Stack Developer<br>crafting pixel-perfect<br>digital experiences.</p>
                 <p class="footer-copy">© 2025 Madhav Jagad. All rights reserved.</p>
             </div>
-
-            <!-- Col 2: Navigation -->
             <div class="footer-col">
                 <p class="footer-col-label">Navigate</p>
                 <ul class="footer-links">
@@ -131,8 +98,6 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-
-            <!-- Col 3: Social -->
             <div class="footer-col">
                 <p class="footer-col-label">Social</p>
                 <ul class="footer-links">
@@ -140,8 +105,6 @@
                     <li><a href="https://www.linkedin.com/in/madhav-jagad" target="_blank">LinkedIn</a></li>
                 </ul>
             </div>
-
-            <!-- Col 4: Contact -->
             <div class="footer-col">
                 <p class="footer-col-label">Contact</p>
                 <ul class="footer-links">
@@ -154,10 +117,8 @@
                     <span>Open to opportunities</span>
                 </div>
             </div>
-
         </div>
 
-        <!-- Very bottom bar -->
         <div class="footer-bar">
             <span class="footer-bar-left">Built with GSAP · Three.js · Lenis</span>
             <button class="footer-back-top" id="backToTop" aria-label="Back to top">
@@ -168,12 +129,9 @@
                 <span>Back to top</span>
             </button>
         </div>
-
     </footer>
 
-    <!-- ═══════════════════════════════════════════
-         SCROLL CONTENT — wraps all page sections
-    ════════════════════════════════════════════ -->
+    <!-- SCROLL CONTENT -->
     <main id="scroll-main">
 
         <!-- Header -->
@@ -190,7 +148,6 @@
                 <div class="nav-bg"></div>
                 <div class="nav-bg"></div>
                 <div class="nav-bg"></div>
-
                 <div class="nav-items">
                     <div class="nav-items-col">
                         <div class="nav-socials">
@@ -199,12 +156,15 @@
                             <a href="mailto:madhavjagad@gmail.com">Email</a>
                         </div>
                         <div class="nav-legal">
-                            <a href="#">About</a>
-                            <a href="#">Contact</a>
-                            <a href="#">Experience</a>
-                            <a href="#">Projects</a>
-                            <a href="#">Skills</a>
+                            <a href="#">Web Development</a>
+                            <a href="#">UI/UX Design</a>
+                            <a href="#">Responsive Design</a>
+                            <a href="#">Web Optimization</a>
                         </div>
+                    </div>
+                    <div class="nav-items-col" style="margin-right: 100px;">
+                        <img src="https://i.pinimg.com/1200x/5f/23/1f/5f231f3d3330036034245ac90ec54a5a.jpg"
+                            alt="Nav decorative image" class="nav-image">
                     </div>
                     <div class="nav-items-col">
                         <div class="nav-primary-links">
@@ -236,11 +196,8 @@
                 <p class="hero-tagline">Crafting scalable digital experiences — from pixel-perfect React UIs to robust
                     Node.js backend systems.</p>
                 <div class="hero-btns">
-                    <button class="hero-btn solid"
-                        onclick="sendPrompt('Show me Madhav Jagad portfolio projects section')">View Work ↗</button>
-                    <button class="hero-btn" onclick="sendPrompt('Show contact section for Madhav Jagad portfolio')">Get
-                        in
-                        Touch</button>
+                    <button class="hero-btn hero-btn--solid">View Work ↗</button>
+                    <button class="hero-btn">Get in Touch</button>
                 </div>
             </div>
             <div class="scroll-hint">
@@ -249,23 +206,25 @@
             </div>
         </div>
 
-        <!-- About me -->
-        <section class="skill h-screen w-full" id="about" style="height:auto; min-height:100vh; background:#0B0B12;"
-            aria-labelledby="about-heading">
+        <!-- About -->
+        <section class="about-section" id="about" aria-labelledby="about-heading">
             <div class="text-wrapper">
                 <div class="section-eyebrow">About Me</div>
                 <h2 class="about-headline" id="about-heading">
                     A developer who loves turning <em>complex ideas</em> into elegant code.
                 </h2>
                 <p>I'm <strong style="color:var(--white)">Madhav Jagad</strong>, a Full Stack Developer based in Surat,
-                    India. I specialize in building responsive, high-performance web applications using <strong
-                        style="color:var(--accent)">React JS, Node.js, and MongoDB</strong>.</p>
+                    India.
+                    I specialize in building responsive, high-performance web applications using
+                    <strong style="color:var(--accent)">React JS, Node.js, and MongoDB</strong>.
+                </p>
                 <br>
-                <p style="color:var(--muted);font-size:.9rem;line-height:1.8">From architecting full-stack financial
-                    platforms to delivering complex client projects 50% ahead of schedule — I thrive in fast-paced agile
-                    environments where clean code and real impact matter. I'm passionate about bridging great design
-                    with robust engineering.</p>
-
+                <p style="color:var(--muted);font-size:.9rem;line-height:1.8">
+                    From architecting full-stack financial platforms to delivering complex client projects 50% ahead of
+                    schedule —
+                    I thrive in fast-paced agile environments where clean code and real impact matter.
+                    I'm passionate about bridging great design with robust engineering.
+                </p>
                 <div class="about-stats" role="list">
                     <div class="about-stat" role="listitem">
                         <span class="about-stat-num">37+</span>
@@ -281,7 +240,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="about-card">
                 <div class="about-avatar-placeholder" aria-label="Madhav Jagad profile">👨‍💻</div>
                 <hr>
@@ -298,8 +256,7 @@
                     <p>37 +</p>
                 </div>
                 <div style="margin-top:.5rem">
-                    <a href="mailto:madhavjagad@gmail.com"
-                        style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(6,182,212,.3);padding:.5rem 1rem;border-radius:100px;transition:all .25s"
+                    <a href="mailto:madhavjagad@gmail.com" class="about-hire-btn"
                         onmouseover="this.style.borderColor='var(--accent)';this.style.background='rgba(6,182,212,.08)'"
                         onmouseout="this.style.borderColor='rgba(6,182,212,.3)';this.style.background='transparent'">
                         <i class="fa-solid fa-envelope"></i> Hire Me
@@ -308,8 +265,8 @@
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <div id="tl-outer" style="background-color: #0d0d14;">
+        <!-- Experience -->
+        <div id="tl-outer">
             <div id="tl-pin">
                 <div id="tl-head">
                     <span class="tl-eyebrow">Career Journey</span>
@@ -320,7 +277,8 @@
                         <div id="tl-spine">
                             <div id="tl-spine-fill"></div>
                         </div>
-                        <div class="tl-slot above" data-i="0" style="--slot-c:var(--c1)">
+
+                        <div class="tl-slot tl-slot--above" data-i="0" style="--slot-c:var(--c1)">
                             <div class="tl-card">
                                 <div class="tl-chip">2025 – 2026</div>
                                 <div class="tl-co">Sourrcecube Technology · Surat</div>
@@ -330,9 +288,11 @@
                                     <li>Architected & delivered full-stack financial platform (H&G ChitFund) — React,
                                         Node.js, MongoDB — end to end, solo.</li>
                                     <li>RBAC with Admin, User, Employee & Manager roles plus automated financial
-                                        reporting & payment tracking.</li>
+                                        reporting &
+                                        payment tracking.</li>
                                     <li>Integrated Cashfree Payment Gateway, SmartPing SMS & Nodemailer email for
-                                        automated payment notifications.</li>
+                                        automated
+                                        payment notifications.</li>
                                 </ul>
                                 <div class="tl-badge">🏆 Promoted ahead of schedule</div>
                             </div>
@@ -340,7 +300,8 @@
                             <div class="tl-dot"></div>
                             <div class="tl-half"></div>
                         </div>
-                        <div class="tl-slot below" data-i="1" style="--slot-c:var(--c2)">
+
+                        <div class="tl-slot tl-slot--below" data-i="1" style="--slot-c:var(--c2)">
                             <div class="tl-half"></div>
                             <div class="tl-dot"></div>
                             <div class="tl-vline"></div>
@@ -353,14 +314,16 @@
                                     <li>Optimised Flow AI, SANADHUB, Indexing Sites & Doc Chat — bug fixes & scalable UI
                                         improvements.</li>
                                     <li>Integrated REST & GraphQL APIs via Apollo Client for efficient, modern data
-                                        flow.</li>
+                                        flow.
+                                    </li>
                                     <li>Delivered Cetus Central in 3 months vs. a 6-month estimate through proactive,
                                         high-velocity execution.</li>
                                 </ul>
                                 <div class="tl-badge">⚡ 50% faster delivery</div>
                             </div>
                         </div>
-                        <div class="tl-slot above" data-i="2" style="--slot-c:var(--c3)">
+
+                        <div class="tl-slot tl-slot--above" data-i="2" style="--slot-c:var(--c3)">
                             <div class="tl-card">
                                 <div class="tl-chip">Apr 2025</div>
                                 <div class="tl-co">Sourrcecube Technology · Surat</div>
@@ -368,9 +331,11 @@
                                 <div class="tl-rule"></div>
                                 <ul class="tl-pts">
                                     <li>Contributed to 5+ live projects — Italianska Online, Numbersring, Nalapod,
-                                        Helpora.</li>
+                                        Helpora.
+                                    </li>
                                     <li>Built pixel-perfect, cross-device responsive interfaces directly from Figma
-                                        design handoffs.</li>
+                                        design
+                                        handoffs.</li>
                                     <li>Established clean modular architecture & Git-based version control workflows in
                                         agile teams.</li>
                                 </ul>
@@ -379,7 +344,8 @@
                             <div class="tl-dot"></div>
                             <div class="tl-half"></div>
                         </div>
-                        <div class="tl-slot below" data-i="3" style="--slot-c:var(--c4)">
+
+                        <div class="tl-slot tl-slot--below" data-i="3" style="--slot-c:var(--c4)">
                             <div class="tl-half"></div>
                             <div class="tl-dot"></div>
                             <div class="tl-vline"></div>
@@ -392,13 +358,16 @@
                                     <li>Developed multiple Angular projects under senior guidance — enterprise best
                                         practices applied throughout.</li>
                                     <li>Contributed to a Dubai airline project involving large-scale enterprise
-                                        application development.</li>
+                                        application
+                                        development.</li>
                                     <li>Expanded skills into React alongside backend fundamentals for full-stack
-                                        readiness.</li>
+                                        readiness.
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="tl-slot above" data-i="4" style="--slot-c:var(--c5)">
+
+                        <div class="tl-slot tl-slot--above" data-i="4" style="--slot-c:var(--c5)">
                             <div class="tl-card">
                                 <div class="tl-chip">Oct 2023 – Mar 2024</div>
                                 <div class="tl-co">Dhiwise Pvt. Ltd. · Surat</div>
@@ -406,7 +375,8 @@
                                 <div class="tl-rule"></div>
                                 <ul class="tl-pts">
                                     <li>Annotated real-world websites to support developers building accurate,
-                                        consistent UI components.</li>
+                                        consistent UI
+                                        components.</li>
                                     <li>Collaborated with dev teams to improve data quality and frontend structural
                                         consistency.</li>
                                     <li>Gained foundational exposure to modern frontend structures and professional
@@ -417,7 +387,8 @@
                             <div class="tl-dot"></div>
                             <div class="tl-half"></div>
                         </div>
-                        <div style="flex:0 0 8vw; min-width:60px;"></div>
+
+                        <div style="flex:0 0 8vw;min-width:60px;"></div>
                     </div>
                 </div>
                 <div id="tl-bar">
@@ -431,61 +402,80 @@
             </div>
         </div>
 
-        <!-- ── HIGHLIGHTS (Why Choose Me) ── -->
+        <!-- Highlights -->
         <section class="highlights-band" aria-labelledby="highlights-heading">
-            <div style="max-width:1100px;margin:0 auto">
-                <div class="section-eyebrow" style="justify-content:flex-start">Why Work With Me</div>
-                <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.04em;color:var(--white);margin-bottom:.5rem;line-height:1.1"
-                    id="highlights-heading">
-                    Built for <em
-                        style="font-style:italic;background:linear-gradient(135deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">results</em>,
-                    not just looks.
-                </h2>
-                <p
-                    style="font-family:var(--font-body);font-size:.9rem;color:var(--muted);max-width:480px;line-height:1.75;margin-bottom:2rem">
-                    A developer who writes clean, maintainable code and consistently delivers ahead of schedule.</p>
-                <div class="highlights-grid">
-                    <div class="highlight-card">
-                        <span class="highlight-icon">⚡</span>
-                        <div class="highlight-title">50% Faster Delivery</div>
-                        <p class="highlight-text">Delivered Cetus Central in 3 months vs. a 6-month estimate through
-                            high-velocity, focused execution — without cutting corners on quality.</p>
+            <div class="hb-inner">
+                <div class="hb-head">
+                    <div class="section-eyebrow">Why Work With Me</div>
+                    <h2 class="hb-h2" id="highlights-heading">Built for <em>results</em>,<br>not just looks.</h2>
+                    <p class="hb-sub">A developer who writes clean, maintainable code and consistently delivers ahead of
+                        schedule.</p>
+                </div>
+                <div class="hb-masonry" id="hbGrid">
+                    <div class="hc hc--tall">
+                        <div class="hc-num">01</div>
+                        <div class="hc-orb"></div>
+                        <span class="hc-icon">⚡</span><span class="hc-tag">Speed</span>
+                        <span class="hc-stat-big">50%</span>
+                        <div class="hc-title">Faster Delivery</div>
+                        <div class="hc-divider"></div>
+                        <p class="hc-text">Delivered Cetus Central in 3 months vs. a 6-month estimate — through
+                            high-velocity, focused execution without cutting corners on quality.</p>
+                        <div class="hc-status"><span class="hc-sdot"></span>Proven track record</div>
                     </div>
-                    <div class="highlight-card">
-                        <span class="highlight-icon">🏗️</span>
-                        <div class="highlight-title">Full-Stack Ownership</div>
-                        <p class="highlight-text">From database schema to pixel-perfect UI — I architected and delivered
-                            the entire H&G ChitFund platform solo, end-to-end, in production.</p>
+                    <div class="hc">
+                        <div class="hc-num">02</div>
+                        <div class="hc-orb"></div>
+                        <span class="hc-icon">🏗️</span><span class="hc-tag">Architecture</span>
+                        <div class="hc-title">Full-Stack Ownership</div>
+                        <p class="hc-text">From database schema to pixel-perfect UI — architected and shipped the entire
+                            H&G
+                            ChitFund platform solo, end-to-end, in production.</p>
+                        <div class="hc-badge">🚀 Solo delivery</div>
                     </div>
-                    <div class="highlight-card">
-                        <span class="highlight-icon">🔐</span>
-                        <div class="highlight-title">Enterprise-Grade Architecture</div>
-                        <p class="highlight-text">RBAC systems with Admin, User, Employee & Manager roles. Integrated
-                            Cashfree Payments, SMS notifications, and automated email reporting.</p>
+                    <div class="hc">
+                        <div class="hc-num">03</div>
+                        <div class="hc-orb"></div>
+                        <span class="hc-icon">🚀</span><span class="hc-tag">Achievement</span>
+                        <div class="hc-title">Promoted Ahead of Schedule</div>
+                        <p class="hc-text">Recognised and promoted early at Sourrcecube Technology for exceptional
+                            performance, initiative, and consistent on-time delivery.</p>
+                        <div class="hc-badge hc-badge--amber">🏆 Early promotion</div>
                     </div>
-                    <div class="highlight-card">
-                        <span class="highlight-icon">🎨</span>
-                        <div class="highlight-title">Pixel-Perfect Interfaces</div>
-                        <p class="highlight-text">Built cross-device responsive interfaces directly from Figma handoffs
-                            with clean modular architecture and Git-based version control workflows.</p>
+                    <div class="hc hc--tall">
+                        <div class="hc-num">04</div>
+                        <div class="hc-orb"></div>
+                        <span class="hc-icon">📦</span><span class="hc-tag">Scale</span>
+                        <span class="hc-stat-big hc-stat-big--green">37+</span>
+                        <div class="hc-title">Projects Shipped</div>
+                        <div class="hc-divider"></div>
+                        <p class="hc-text">From enterprise financial SaaS to AI dashboards and e-commerce platforms — a
+                            broad portfolio of real-world impact.</p>
                     </div>
-                    <div class="highlight-card">
-                        <span class="highlight-icon">🔗</span>
-                        <div class="highlight-title">Modern API Integration</div>
-                        <p class="highlight-text">Experienced with REST and GraphQL APIs via Apollo Client, enabling
-                            efficient, type-safe data flows across complex frontend applications.</p>
+                    <div class="hc">
+                        <div class="hc-num">05</div>
+                        <div class="hc-orb"></div>
+                        <span class="hc-icon">🔐</span><span class="hc-tag hc-tag--red">Security</span>
+                        <div class="hc-title">Enterprise-Grade Architecture</div>
+                        <p class="hc-text">RBAC with Admin, User, Employee & Manager roles. Integrated Cashfree
+                            Payments,
+                            SMS notifications, and automated email reporting.</p>
                     </div>
-                    <div class="highlight-card">
-                        <span class="highlight-icon">🚀</span>
-                        <div class="highlight-title">Promoted Ahead of Schedule</div>
-                        <p class="highlight-text">Recognised and promoted early at Sourrcecube Technology for
-                            exceptional performance, initiative, and consistent on-time delivery.</p>
+                    <div class="hc">
+                        <div class="hc-num">06</div>
+                        <div class="hc-orb"></div>
+                        <span class="hc-icon">🔗</span><span class="hc-tag hc-tag--purple">APIs</span>
+                        <div class="hc-title">Modern API Integration</div>
+                        <p class="hc-text">REST and GraphQL APIs via Apollo Client — efficient, type-safe data flows
+                            across
+                            complex frontend applications.</p>
+                        <div class="hc-badge hc-badge--purple">GraphQL · REST</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skill Section -->
+        <!-- Skill Sticky Cards -->
         <section id="skill">
             <div class="sticky-cards">
                 <div class="card" id="card-1">
@@ -496,7 +486,8 @@
                                 style="background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
                                 Frontend Development</p>
                             <p class="desc" style="margin-top:.8rem">Building fast, interactive UIs with React,
-                                TypeScript & modern CSS — pixel-perfect, every time.</p>
+                                TypeScript &
+                                modern CSS — pixel-perfect, every time.</p>
                         </div>
                         <div class="pills">
                             <span class="pill"
@@ -520,6 +511,7 @@
                             alt="Frontend Development" loading="lazy" />
                     </div>
                 </div>
+
                 <div class="card" id="card-2">
                     <div class="col skill-card-label">
                         <span class="eyebrow">02 / Skill</span>
@@ -528,7 +520,8 @@
                                 style="background:linear-gradient(135deg,#06b6d4,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
                                 Backend & APIs</p>
                             <p class="desc" style="margin-top:.8rem">Designing robust server-side systems, RESTful &
-                                GraphQL APIs that scale with your business needs.</p>
+                                GraphQL
+                                APIs that scale with your business needs.</p>
                         </div>
                         <div class="pills">
                             <span class="pill"
@@ -552,6 +545,7 @@
                             alt="Backend Development" loading="lazy" />
                     </div>
                 </div>
+
                 <div class="card" id="card-3">
                     <div class="col skill-card-label">
                         <span class="eyebrow">03 / Skill</span>
@@ -567,7 +561,8 @@
                                 style="color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)">Figma</span>
                             <span class="pill"
                                 style="color:#06b6d4;border-color:rgba(6,182,212,.3);background:rgba(6,182,212,.08)">SCSS
-                                / SASS</span>
+                                /
+                                SASS</span>
                             <span class="pill"
                                 style="color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)">Animations</span>
                             <span class="pill"
@@ -581,6 +576,7 @@
                             alt="UI/UX Design" loading="lazy" />
                     </div>
                 </div>
+
                 <div class="card" id="card-4">
                     <div class="col skill-card-label">
                         <span class="eyebrow">04 / Skill</span>
@@ -589,12 +585,14 @@
                                 style="background:linear-gradient(135deg,#f59e0b,#f43f5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
                                 DevOps & Tools</p>
                             <p class="desc" style="margin-top:.8rem">Streamlining workflows with modern tooling — from
-                                Git version control to payment gateway integrations.</p>
+                                Git
+                                version control to payment gateway integrations.</p>
                         </div>
                         <div class="pills">
                             <span class="pill"
                                 style="color:#f59e0b;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.08)">Git
-                                / GitHub</span>
+                                /
+                                GitHub</span>
                             <span class="pill"
                                 style="color:#f43f5e;border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.08)">Cashfree
                                 API</span>
@@ -615,8 +613,28 @@
             </div>
         </section>
 
-        <!-- ── FULL SKILLS GRID ── -->
+        <!-- Full Skills Grid -->
         <section class="skills-grid-section" id="skills" aria-labelledby="skills-grid-heading">
+            <div class="object-container">
+                <div class="object">
+                    <p>HTML</p>
+                </div>
+                <div class="object">
+                    <p>CSS</p>
+                </div>
+                <div class="object">
+                    <p>JS</p>
+                </div>
+                <div class="object">
+                    <p>React</p>
+                </div>
+                <div class="object">
+                    <p>GSAP</p>
+                </div>
+                <div class="object">
+                    <p>Three.JS</p>
+                </div>
+            </div>
             <div class="skills-title-block">
                 <div class="section-eyebrow" style="justify-content:center">Technical Expertise</div>
                 <h2 class="skills-main-h2" id="skills-grid-heading">My <span>Tech Stack</span></h2>
@@ -628,14 +646,10 @@
                     <div class="skill-cat-icon">⚛️</div>
                     <div class="skill-cat-name">Frontend</div>
                     <div class="skill-pills">
-                        <span class="skill-pill">React JS</span>
-                        <span class="skill-pill">Angular</span>
-                        <span class="skill-pill">Next.js</span>
-                        <span class="skill-pill">TypeScript</span>
-                        <span class="skill-pill">JavaScript (ES6+)</span>
-                        <span class="skill-pill">HTML5</span>
-                        <span class="skill-pill">CSS3 / SCSS</span>
-                        <span class="skill-pill">Tailwind CSS</span>
+                        <span class="skill-pill">React JS</span><span class="skill-pill">Angular</span>
+                        <span class="skill-pill">Next.js</span><span class="skill-pill">TypeScript</span>
+                        <span class="skill-pill">JavaScript (ES6+)</span><span class="skill-pill">HTML5</span>
+                        <span class="skill-pill">CSS3 / SCSS</span><span class="skill-pill">Tailwind CSS</span>
                         <span class="skill-pill">Bootstrap</span>
                     </div>
                 </div>
@@ -643,28 +657,20 @@
                     <div class="skill-cat-icon">🖥️</div>
                     <div class="skill-cat-name">Backend</div>
                     <div class="skill-pills">
-                        <span class="skill-pill">Node.js</span>
-                        <span class="skill-pill">Express.js</span>
-                        <span class="skill-pill">MongoDB</span>
-                        <span class="skill-pill">Mongoose</span>
-                        <span class="skill-pill">REST APIs</span>
-                        <span class="skill-pill">GraphQL</span>
-                        <span class="skill-pill">Apollo Client</span>
-                        <span class="skill-pill">JWT / Auth</span>
+                        <span class="skill-pill">Node.js</span><span class="skill-pill">Express.js</span>
+                        <span class="skill-pill">MongoDB</span><span class="skill-pill">Mongoose</span>
+                        <span class="skill-pill">REST APIs</span><span class="skill-pill">GraphQL</span>
+                        <span class="skill-pill">Apollo Client</span><span class="skill-pill">JWT / Auth</span>
                     </div>
                 </div>
                 <div class="skill-cat-card" style="--cat-color:#34d399">
                     <div class="skill-cat-icon">🛠️</div>
                     <div class="skill-cat-name">Tools & Integrations</div>
                     <div class="skill-pills">
-                        <span class="skill-pill">Git / GitHub</span>
-                        <span class="skill-pill">Figma</span>
-                        <span class="skill-pill">GSAP</span>
-                        <span class="skill-pill">Three.js</span>
-                        <span class="skill-pill">Cashfree</span>
-                        <span class="skill-pill">Nodemailer</span>
-                        <span class="skill-pill">Redux</span>
-                        <span class="skill-pill">Netlify</span>
+                        <span class="skill-pill">Git / GitHub</span><span class="skill-pill">Figma</span>
+                        <span class="skill-pill">GSAP</span><span class="skill-pill">Three.js</span>
+                        <span class="skill-pill">Cashfree</span><span class="skill-pill">Nodemailer</span>
+                        <span class="skill-pill">Redux</span><span class="skill-pill">Netlify</span>
                         <span class="skill-pill">Agile / Scrum</span>
                     </div>
                 </div>
@@ -672,7 +678,7 @@
         </section>
 
         <!-- Work Section -->
-        <section id="work-section" style="background-color: black;">
+        <section id="work-section">
             <div class="work-sticky">
                 <div class="grid-bg"></div>
                 <div class="cards-container" id="cardsContainer">
@@ -682,10 +688,17 @@
                             <div class="card-info">
                                 <div>
                                     <p class="card-tag">Full Stack / Finance</p>
-                                    <p class="card-title">H&G CHITFUND</p>
-                                    <p class="card-desc">Financial SaaS platform — React, Node.js, MongoDB</p>
+                                    <p class="card-title">E-commerce Website</p>
+                                    <p class="card-desc">A fully responsive e-commerce website with product listings,
+                                        cart functionality, and payment
+                                        integration.</p>
                                 </div>
-                                <div class="card-arrow">→</div>
+                                <div class="project-links">
+                                    <a href="under_Working.html" class="project-link" target="_blank"><i
+                                            class="fas fa-eye"></i></a>
+                                    <a href="https://github.com/MadhavJagad/React-E-com.git" class="project-link"
+                                        target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-overlay"></div>
@@ -696,10 +709,15 @@
                             <div class="card-info">
                                 <div>
                                     <p class="card-tag">Frontend / AI</p>
-                                    <p class="card-title">CETUS CENTRAL</p>
-                                    <p class="card-desc">International client project — GraphQL, Apollo Client</p>
+                                    <p class="card-title">Book Store App</p>
+                                    <p class="card-desc">Online Selling and buying books platform</p>
                                 </div>
-                                <div class="card-arrow">→</div>
+                                <div class="project-links">
+                                    <a href="under_Working.html" class="project-link" target="_blank"><i
+                                            class="fas fa-eye"></i></a>
+                                    <a href="https://github.com/MadhavJagad/Book-Store-Project" class="project-link"
+                                        target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-overlay"></div>
@@ -710,10 +728,14 @@
                             <div class="card-info">
                                 <div>
                                     <p class="card-tag">Full Stack / E-Commerce</p>
-                                    <p class="card-title">BOOK STORE APP</p>
-                                    <p class="card-desc">Full-stack — buyer/seller roles, cart, order management</p>
+                                    <p class="card-title">Painting</p>
+                                    <p class="card-desc">Online painting buying and selling website</p>
                                 </div>
-                                <div class="card-arrow">→</div>
+                                <div class="project-links">
+                                    <a href="under_Working.html" target="_blank" class="project-link"><i
+                                            class="fas fa-eye"></i></a>
+                                    <a href="#" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-overlay"></div>
@@ -724,10 +746,17 @@
                             <div class="card-info">
                                 <div>
                                     <p class="card-tag">UI / Platform</p>
-                                    <p class="card-title">FLOW AI</p>
-                                    <p class="card-desc">AI dashboard UI — performance & scalable design</p>
+                                    <p class="card-title">Weather Dashboard</p>
+                                    <p class="card-desc">An interactive weather dashboard that displays current weather
+                                        and forecasts based on user
+                                        location or search.</p>
                                 </div>
-                                <div class="card-arrow">→</div>
+                                <div class="project-links">
+                                    <a href="https://weather-checking-with-react.netlify.app/" class="project-link"
+                                        target="_blank"><i class="fas fa-eye"></i></a>
+                                    <a href="https://github.com/MadhavJagad/Practical_Works.git" target="_blank"
+                                        class="project-link"><i class="fab fa-github"></i></a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-overlay"></div>
@@ -738,10 +767,16 @@
                             <div class="card-info">
                                 <div>
                                     <p class="card-tag">Frontend / E-Commerce</p>
-                                    <p class="card-title">E-COMMERCE SITE</p>
-                                    <p class="card-desc">Responsive platform — REST API, state management</p>
+                                    <p class="card-title">Pokemon</p>
+                                    <p class="card-desc">An interactive website that shows the all pokemons and their
+                                        power and can be searched</p>
                                 </div>
-                                <div class="card-arrow">→</div>
+                                <div class="project-links">
+                                    <a href="https://catching-pokemon-react.netlify.app/" class="project-link"
+                                        target="_blank"><i class="fas fa-eye"></i></a>
+                                    <a href="https://github.com/MadhavJagad/Pokemon.git" class="project-link"
+                                        target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-overlay"></div>
@@ -751,20 +786,14 @@
                     <div class="capsule-ring"></div>
                     <div class="capsule" id="capsule">
                         <div class="work-letters" id="workLetters">
-                            <span id="lW">W</span>
-                            <span id="lO">O</span>
-                            <span id="lR">R</span>
-                            <span id="lK">K</span>
+                            <span id="lW">W</span><span id="lO">O</span>
+                            <span id="lR">R</span><span id="lK">K</span>
                         </div>
                     </div>
                 </div>
-                <div style="position:absolute;top:2.5rem;left:6vw;z-index:20;pointer-events:none"
-                    id="work-header-label">
+                <div class="work-header-label" id="work-header-label">
                     <div class="section-eyebrow" style="opacity:.6">Selected Projects</div>
-                    <h2 id="work-heading"
-                        style="font-family:var(--font-display);font-size:clamp(1.2rem,2vw,1.8rem);font-weight:700;letter-spacing:-.03em;color:rgba(229,231,235,.5);line-height:1.1;margin-top:.3rem">
-                        Real work. Real impact.
-                    </h2>
+                    <h2 id="work-heading" class="work-heading-text">Real work. Real impact.</h2>
                 </div>
                 <div class="scroll-hint" id="scrollHint">
                     <div class="scroll-line"></div>
@@ -773,134 +802,140 @@
             </div>
         </section>
 
-        <!-- ── CONTACT SECTION ── -->
-        <section id="contact-section" style="background:#080810;padding:8rem 6vw;position:relative;overflow:hidden"
-            aria-labelledby="contact-heading">
-            <div
-                style="position:absolute;top:-10%;right:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(124,58,237,.1) 0%,transparent 65%);border-radius:50%;pointer-events:none">
-            </div>
-            <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start"
-                class="contact-inner">
-                <div>
-                    <div class="section-eyebrow">Get In Touch</div>
-                    <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);font-weight:700;letter-spacing:-.05em;color:var(--white);line-height:1;margin-bottom:1rem"
-                        id="contact-heading">
-                        Let's work<br><em
-                            style="font-style:italic;background:linear-gradient(135deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">together.</em>
-                    </h2>
-                    <p
-                        style="font-family:var(--font-body);font-size:.9rem;color:var(--muted);max-width:400px;line-height:1.8;margin-bottom:2.5rem">
-                        I'm currently open to freelance projects and full-time opportunities. Whether you have a
-                        question or just want to say hi — my inbox is always open.
-                    </p>
-                    <div style="display:flex;flex-direction:column;gap:1rem">
-                        <a href="mailto:madhavjagad@gmail.com"
-                            style="display:inline-flex;align-items:center;gap:.8rem;text-decoration:none;color:var(--white);font-family:var(--font-body);font-size:.9rem;transition:color .25s"
-                            onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--white)'">
-                            <span
-                                style="width:36px;height:36px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--accent)"><i
-                                    class="fa-solid fa-envelope"></i></span>
-                            madhavjagad@gmail.com
-                        </a>
-                        <a href="tel:+919537477974"
-                            style="display:inline-flex;align-items:center;gap:.8rem;text-decoration:none;color:var(--white);font-family:var(--font-body);font-size:.9rem;transition:color .25s"
-                            onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--white)'">
-                            <span
-                                style="width:36px;height:36px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--accent)"><i
-                                    class="fa-solid fa-phone"></i></span>
-                            +91 9537477974
-                        </a>
-                        <div
-                            style="display:inline-flex;align-items:center;gap:.8rem;color:var(--muted);font-family:var(--font-body);font-size:.9rem">
-                            <span
-                                style="width:36px;height:36px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--accent)"><i
-                                    class="fa-solid fa-location-dot"></i></span>
-                            Surat, Gujarat, India
+        <!-- Contact Section -->
+        <section id="contact-section">
+            <div class="page">
+                <div class="left">
+                    <div class="eyebrow">Get In Touch</div>
+                    <h2 class="main-h2">Let's work<br><em>together.</em></h2>
+                    <p class="sub-txt">Open to freelance projects and full-time roles. Whether you have a question or
+                        just
+                        want to say hi — my inbox is always open.</p>
+
+                    <div class="info-stack">
+                        <div class="info-row">
+                            <div class="ii">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="il">Email</div>
+                                <a href="mailto:madhavjagad@gmail.com" class="iv">madhavjagad@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="ii">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.24 10a19.79 19.79 0 01-3.07-8.67A2 2 0 012.15 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="il">Phone</div>
+                                <a href="tel:+919537477974" class="iv">+91 9537477974</a>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="ii">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="il">Location</div>
+                                <span class="iv">Surat, Gujarat, India</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="ii">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="il">Response Time</div>
+                                <span class="iv">Within 24 hours</span>
+                            </div>
                         </div>
                     </div>
-                    <div style="display:flex;gap:.75rem;margin-top:2rem">
-                        <a href="https://github.com/MadhavJagad" target="_blank" rel="noopener" aria-label="GitHub"
-                            style="width:40px;height:40px;border:1px solid rgba(124,58,237,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .25s"
-                            onmouseover="this.style.color='var(--accent)';this.style.borderColor='rgba(6,182,212,.5)'"
-                            onmouseout="this.style.color='var(--muted)';this.style.borderColor='rgba(124,58,237,.25)'"><i
-                                class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/madhav-jagad" target="_blank" rel="noopener"
-                            aria-label="LinkedIn"
-                            style="width:40px;height:40px;border:1px solid rgba(124,58,237,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .25s"
-                            onmouseover="this.style.color='var(--accent)';this.style.borderColor='rgba(6,182,212,.5)'"
-                            onmouseout="this.style.color='var(--muted)';this.style.borderColor='rgba(124,58,237,.25)'"><i
-                                class="fab fa-linkedin"></i></a>
+
+                    <div class="bottom-row">
+                        <a href="https://github.com/MadhavJagad" target="_blank" class="soc">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/madhav-jagad" target="_blank" class="soc">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                        </a>
+                        <div class="avail"><span class="adot"></span>Open to opportunities</div>
                     </div>
                 </div>
-                <!-- Quick contact info card -->
-                <div
-                    style="background:rgba(11,11,18,.85);border:1px solid rgba(124,58,237,.15);border-radius:20px;padding:2rem;backdrop-filter:blur(20px)">
-                    <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem">
-                        <span class="status-dot"></span>
-                        <span
-                            style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)">Currently
-                            Available</span>
+
+                <div class="right">
+                    <div class="glow-orb"></div>
+                    <canvas id="phone-canvas"></canvas>
+                    <div class="form-panel" id="fp">
+                        <div class="fp-title">Send a Message</div>
+                        <div id="form-body">
+                            <div class="fg">
+                                <div class="field"><label>Name</label><input type="text" id="fn" placeholder="John Doe">
+                                </div>
+                                <div class="field"><label>Email</label><input type="email" id="fe"
+                                        placeholder="john@acme.com"></div>
+                            </div>
+                            <div class="field" style="margin-bottom:.7rem">
+                                <label>Topic</label>
+                                <select id="fs">
+                                    <option value="">Select…</option>
+                                    <option>Full-time Opportunity</option>
+                                    <option>Freelance Project</option>
+                                    <option>Collaboration</option>
+                                    <option>Just Saying Hi</option>
+                                </select>
+                            </div>
+                            <div class="field"><label>Message</label><textarea id="fm" maxlength="500"
+                                    placeholder="Tell me about your project…"></textarea></div>
+                            <div class="ccount" id="cc">0 / 500</div>
+                            <div class="send-row">
+                                <button class="send-btn" id="sb">
+                                    Send Message
+                                    <svg viewBox="0 0 24 24">
+                                        <line x1="22" y1="2" x2="11" y2="13" />
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                    </svg>
+                                </button>
+                                <span class="privacy">Goes straight to<br>Madhav's inbox.</span>
+                            </div>
+                        </div>
+                        <div class="success-state" id="ss">
+                            <div class="scheck">
+                                <svg viewBox="0 0 24 24">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                            </div>
+                            <div class="s-title">Message sent!</div>
+                            <div class="s-sub">Thanks for reaching out.<br>Madhav will reply within 24 hours.</div>
+                            <button class="reset-btn" id="rb">Send another</button>
+                        </div>
                     </div>
-                    <p
-                        style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--white);letter-spacing:-.02em;margin-bottom:.5rem">
-                        Open to opportunities</p>
-                    <p
-                        style="font-family:var(--font-body);font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem">
-                        Freelance projects, full-time roles, and exciting collaborations welcome. I typically respond
-                        within 24 hours.</p>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-                        <div
-                            style="background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.12);border-radius:10px;padding:.9rem">
-                            <p
-                                style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem">
-                                Role Type</p>
-                            <p style="font-family:var(--font-body);font-size:.82rem;color:var(--white)">Full-time /
-                                Freelance</p>
-                        </div>
-                        <div
-                            style="background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.12);border-radius:10px;padding:.9rem">
-                            <p
-                                style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem">
-                                Availability</p>
-                            <p style="font-family:var(--font-body);font-size:.82rem;color:var(--white)">Immediate</p>
-                        </div>
-                        <div
-                            style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.12);border-radius:10px;padding:.9rem">
-                            <p
-                                style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem">
-                                Experience</p>
-                            <p style="font-family:var(--font-body);font-size:.82rem;color:var(--white)">1.5+ Years</p>
-                        </div>
-                        <div
-                            style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.12);border-radius:10px;padding:.9rem">
-                            <p
-                                style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem">
-                                Location</p>
-                            <p style="font-family:var(--font-body);font-size:.82rem;color:var(--white)">Surat, India</p>
-                        </div>
-                    </div>
-                    <a href="mailto:madhavjagad@gmail.com"
-                        style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:1.5rem;padding:.9rem;background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff;text-decoration:none;border-radius:10px;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;transition:box-shadow .3s"
-                        onmouseover="this.style.boxShadow='0 0 30px rgba(124,58,237,.4)'"
-                        onmouseout="this.style.boxShadow='none'">
-                        <i class="fa-solid fa-paper-plane"></i> Send Me a Message
-                    </a>
                 </div>
             </div>
-            <style>
-                @media(max-width:768px) {
-                    .contact-inner {
-                        grid-template-columns: 1fr !important;
-                        gap: 2rem !important
-                    }
-                }
-            </style>
         </section>
 
-        <!-- ── FOOTER SPACER ── -->
         <div id="footer-spacer"></div>
 
-    </main><!-- /scroll-main -->
+    </main>
 
     <!-- SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
@@ -910,7 +945,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
     <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/sheryjs/dist/Shery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
+    <!-- <script type="text/javascript" src="https://unpkg.com/sheryjs/dist/Shery.js"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sheryjs/dist/Shery.js"></script>
+
+
     <script src="script.js"></script>
 </body>
 

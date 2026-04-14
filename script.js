@@ -1,8 +1,5 @@
 gsap.registerPlugin(SplitText, CustomEase, ScrollTrigger);
 
-// ====================
-// Lenis smooth scroll
-// ====================
 const lenis = new Lenis();
 lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => {
@@ -10,9 +7,6 @@ gsap.ticker.add((time) => {
 });
 gsap.ticker.lagSmoothing(0);
 
-// ============================================================
-// CUSTOM CURSOR
-// ============================================================
 const cursorDot = document.getElementById("cursor-dot");
 const cursorRing = document.getElementById("cursor-ring");
 let mouseX = 0,
@@ -47,9 +41,6 @@ document
     );
   });
 
-// ============================================================
-// NAV
-// ============================================================
 const navToggler = document.querySelector(".nav-toggler");
 const navBgs = document.querySelectorAll(".nav-bg");
 let isMenuOpen = false,
@@ -123,9 +114,6 @@ function animateLinksIn() {
   });
 }
 
-// ============================================================
-// LOADER
-// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
   CustomEase.create("hop", "0.9,0,0.1,1");
   document.body.style.overflow = "hidden";
@@ -145,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loaderTl = gsap.timeline({
     onComplete: () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("loading");
       initNavShery();
       gsap.to("nav", {
         opacity: 1,
@@ -241,19 +230,18 @@ function initNavShery() {
     ease: "cubic-bezier(0.23, 1, 0.320, 1)",
     duration: 1,
   });
-  Shery.textAnimate(".nav-logo", {
-    style: 1,
-    y: 10,
-    delay: 0.1,
-    duration: 2,
-    ease: "cubic-bezier(0.23, 1, 0.320, 1)",
-    multiplier: 0.1,
-  });
+
+  // const navImg = document.querySelector(".nav-image");
+  // if (navImg) {
+  //   Shery.imageEffect(".nav-image", { style: 1 });
+  // }
+
+  // Shery.imageEffect(".nav-image", {
+  //   style: 2 /*OR 5 for different variant */,
+  //   debug: true,
+  // });
 }
 
-// ============================================================
-// HERO — Three.js shader + cursor trail + water ripples
-// ============================================================
 (function () {
   const wrap = document.getElementById("hero-wrap");
   const shaderCanvas = document.getElementById("hero-canvas");
@@ -272,8 +260,8 @@ function initNavShery() {
     trailCanvas.height = H;
     rippleCanvas.width = W;
     rippleCanvas.height = H;
-    renderer.setSize(W, H);
     uniforms.uResolution.value.set(W, H);
+    renderer.setSize(W, H);
   }
 
   trailCanvas.width = W;
@@ -700,8 +688,8 @@ function initNavShery() {
     }
   }
 
-  function animate() {
-    requestAnimationFrame(animate);
+  function heroAnimate() {
+    requestAnimationFrame(heroAnimate);
     currentMouse.x += (targetMouse.x - currentMouse.x) * 0.07;
     currentMouse.y += (targetMouse.y - currentMouse.y) * 0.07;
     uniforms.uMouse.value.copy(currentMouse);
@@ -711,15 +699,12 @@ function initNavShery() {
     drawTrail();
     drawRipples();
   }
-  animate();
+  heroAnimate();
 
   const ro = new ResizeObserver(resize);
   ro.observe(wrap);
 })();
 
-// ============================================================
-// EXPERIENCE TIMELINE — horizontal scroll
-// ============================================================
 const tlOuter = document.getElementById("tl-outer");
 const tlPin = document.getElementById("tl-pin");
 const tlTrack = document.getElementById("tl-track");
@@ -840,14 +825,9 @@ window.addEventListener("resize", () => {
   ScrollTrigger.refresh(true);
 });
 
-// ============================================================
-// SKILL SECTION — cinematic stacked cards
-// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
   const skillCards = document.querySelectorAll(".sticky-cards .card");
   const totalCards = skillCards.length;
-  const skillCurEl = document.getElementById("skill-cur");
-
   const cardYStep = 14;
   const cardScaleStep = 0.055;
 
@@ -871,8 +851,6 @@ document.addEventListener("DOMContentLoaded", () => {
     pin: true,
     pinSpacing: true,
     scrub: 1.2,
-    // ── FIX: call ScrollTrigger.refresh after this pin is created
-    // so the work section below re-calculates its start position correctly
     onRefresh() {
       ScrollTrigger.getAll()
         .filter(
@@ -887,9 +865,6 @@ document.addEventListener("DOMContentLoaded", () => {
         totalCards - 1,
       );
       const segProgress = (progress - activeIndex * segmentSize) / segmentSize;
-
-      if (skillCurEl)
-        skillCurEl.textContent = String(activeIndex + 1).padStart(2, "0");
 
       skillCards.forEach((card, i) => {
         if (i < activeIndex) {
@@ -935,14 +910,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// ============================================================
-// WORK SECTION — capsule expand + card scroll
-// ──────────────────────────────────────────────────────────
-// FIX: All measurements (vw, vh, targetW, targetH, card init)
-// are now inside a function called AFTER ScrollTrigger.refresh,
-// so the pinned skill section's extra scroll height is already
-// accounted for when work section calculates its positions.
-// ============================================================
 function initWorkSection() {
   const workSection = document.getElementById("work-section");
   const workCapsule = document.getElementById("capsule");
@@ -951,13 +918,11 @@ function initWorkSection() {
   const workContainer = document.getElementById("cardsContainer");
   const workScrollHint = document.getElementById("scrollHint");
 
-  // ── FIX: read dimensions inside the function, not at parse time ──
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   const targetW = vw * 0.96;
   const targetH = vh * 0.92;
 
-  // ── FIX: set initial card positions here, after refresh ──
   gsap.set(workCards, { x: (i) => 1400 + i * 120, opacity: 0 });
 
   ScrollTrigger.create({
@@ -967,14 +932,11 @@ function initWorkSection() {
     scrub: 1,
     onUpdate(self) {
       const p = self.progress;
-
-      // Phase 1 (0 → 0.35): Capsule expands, letters fade
       const phase1 = Math.min(p / 0.35, 1);
       const eased1 = gsap.parseEase("power2.inOut")(phase1);
       const curW = gsap.utils.interpolate(200, targetW, eased1);
       const curH = gsap.utils.interpolate(520, targetH, eased1);
       const curR = gsap.utils.interpolate(999, 28, eased1);
-
       gsap.set(workCapsule, { width: curW, height: curH, borderRadius: curR });
 
       const letterOpacity = 1 - Math.min(phase1 * 1.6, 1);
@@ -983,12 +945,10 @@ function initWorkSection() {
       document.querySelector(".capsule-ring").style.opacity = 1 - eased1;
       workScrollHint.style.opacity = 1 - Math.min(p / 0.1, 1);
 
-      // Phase 2 (0.35 → 0.5): Cards fade in
       const phase2 = Math.max(0, Math.min((p - 0.35) / 0.15, 1));
       gsap.set(workContainer, { opacity: phase2 });
       workContainer.style.pointerEvents = phase2 > 0 ? "auto" : "none";
 
-      // Phase 3 (0.5 → 1.0): Cards scroll horizontally
       if (p >= 0.5) {
         const slideP = (p - 0.5) / 0.5;
         const maxShift =
@@ -1009,183 +969,165 @@ function initWorkSection() {
   });
 }
 
-// ── Run work section init after a full ScrollTrigger refresh
-//    so the skill section's pinSpacing is baked into page heights ──
 ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
   ScrollTrigger.removeEventListener("refresh", onFirstRefresh);
   initWorkSection();
 });
 
-// ============================================================
-// MATTER.JS — physics pill tags
-// ──────────────────────────────────────────────────────────
-// BUG FIX: The original code passed body setup statements
-// (setAngle, bodies.push, World.add, setTimeout) as extra
-// arguments to Matter.Bodies.rectangle() which silently
-// ignored them — body was never stored or added to the world.
-// Also, mouseConstraint was created inside the forEach loop
-// so it was recreated for every object. Fixed below.
-// ============================================================
-// (function initMatterJS() {
-//   const container = document.querySelector("#skill .object-container");
-//   if (!container) return;
+(function initMatterJS() {
+  const section = document.querySelector("#skills");
+  const container = section ? section.querySelector(".object-container") : null;
+  if (!container) return;
 
-//   // Only init when section enters viewport
-//   ScrollTrigger.create({
-//     trigger: container,
-//     start: "top bottom",
-//     once: true,
-//     onEnter: () => setupPhysics(container),
-//   });
-// })();
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top 85%",
+    once: true,
+    onEnter: () => setupPhysics(container, section),
+  });
+})();
 
-// function setupPhysics(container) {
-//   const {
-//     Engine,
-//     Runner,
-//     Bodies,
-//     Body,
-//     World,
-//     Mouse,
-//     MouseConstraint,
-//     Events,
-//   } = Matter;
+function setupPhysics(container, section) {
+  const {
+    Engine,
+    Runner,
+    Bodies,
+    Body,
+    World,
+    Mouse,
+    MouseConstraint,
+    Events,
+  } = Matter;
 
-//   const engine = Engine.create();
-//   engine.gravity.y = 1;
+  const engine = Engine.create();
+  engine.gravity.y = 1;
 
-//   const containerRect = container.getBoundingClientRect();
-//   const W = containerRect.width;
-//   const H = containerRect.height;
-//   const T = 200; // wall thickness
+  const sectionRect = section.getBoundingClientRect();
+  const W = sectionRect.width;
+  const H = sectionRect.height;
+  const T = 200;
 
-//   // Walls
-//   const walls = [
-//     Bodies.rectangle(W / 2, H + T / 2, W + T * 2, T, { isStatic: true }), // floor
-//     Bodies.rectangle(-T / 2, H / 2, T, H + T * 2, { isStatic: true }), // left
-//     Bodies.rectangle(W + T / 2, H / 2, T, H + T * 2, { isStatic: true }), // right
-//   ];
-//   World.add(engine.world, walls);
+  const walls = [
+    Bodies.rectangle(W / 2, H + T / 2, W + T * 2, T, { isStatic: true }),
+    Bodies.rectangle(-T / 2, H / 2, T, H + T * 2, { isStatic: true }),
+    Bodies.rectangle(W + T / 2, H / 2, T, H + T * 2, { isStatic: true }),
+  ];
+  World.add(engine.world, walls);
 
-//   // ── FIX: Build bodies correctly — separate statements ──
-//   const bodiesData = [];
-//   const objects = container.querySelectorAll(".object");
+  const bodiesData = [];
+  const objects = container.querySelectorAll(".object");
 
-//   objects.forEach((obj, index) => {
-//     const objRect = obj.getBoundingClientRect();
-//     const bw = objRect.width;
-//     const bh = objRect.height;
-//     const startX = Math.random() * (W - bw) + bw / 2;
-//     const startY = -300 - index * 180;
+  objects.forEach((obj, index) => {
+    obj.style.position = "absolute";
+    obj.style.left = "0px";
+    obj.style.top = "0px";
+    const objRect = obj.getBoundingClientRect();
+    const bw = Math.max(objRect.width, 80);
+    const bh = Math.max(objRect.height, 40);
+    const startX = Math.random() * (W - bw - 40) + bw / 2 + 20;
+    const startY = -150 - index * 120;
 
-//     const body = Bodies.rectangle(startX, startY, bw, bh, {
-//       restitution: 0.45,
-//       friction: 0.15,
-//       frictionAir: 0.02,
-//       density: 0.002,
-//       chamfer: { radius: 24 }, // rounded corners to match pill CSS
-//     });
+    const body = Bodies.rectangle(startX, startY, bw, bh, {
+      restitution: 0.4,
+      friction: 0.18,
+      frictionAir: 0.025,
+      density: 0.002,
+      chamfer: { radius: Math.min(bh / 2, 28) },
+    });
+    Body.setAngle(body, (Math.random() - 0.5) * 0.8);
+    World.add(engine.world, body);
+    bodiesData.push({ body, element: obj, width: bw, height: bh });
+  });
 
-//     // FIX: setAngle AFTER body is created, as a separate call
-//     Body.setAngle(body, (Math.random() - 0.5) * Math.PI);
+  setTimeout(() => {
+    const topWall = Bodies.rectangle(W / 2, -T / 2, W + T * 2, T, {
+      isStatic: true,
+    });
+    World.add(engine.world, topWall);
+  }, 2500);
 
-//     World.add(engine.world, body);
-//     bodiesData.push({ body, element: obj, width: bw, height: bh });
-//   });
+  const mouse = Mouse.create(section);
+  mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
+  mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
 
-//   // Add ceiling after 3 s so objects settle first
-//   setTimeout(() => {
-//     const topWall = Bodies.rectangle(W / 2, -T / 2, W + T * 2, T, {
-//       isStatic: true,
-//     });
-//     World.add(engine.world, topWall);
-//   }, 3000);
+  const containerOffset = { x: container.offsetLeft, y: container.offsetTop };
+  mouse.offset = { x: -containerOffset.x, y: -containerOffset.y };
 
-//   // ── FIX: single mouse constraint, created once outside forEach ──
-//   const mouse = Mouse.create(container);
-//   // Remove scroll interference
-//   mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
-//   mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
+  const mc = MouseConstraint.create(engine, {
+    mouse,
+    constraint: { stiffness: 0.55, render: { visible: false } },
+  });
+  World.add(engine.world, mc);
 
-//   const mc = MouseConstraint.create(engine, {
-//     mouse,
-//     constraint: { stiffness: 0.6, render: { visible: false } },
-//   });
-//   World.add(engine.world, mc);
-//   mc.mouse.element.oncontextmenu = () => false;
+  let dragging = null,
+    origInertia = null;
+  Events.on(mc, "startdrag", ({ body }) => {
+    dragging = body;
+    if (dragging) {
+      origInertia = dragging.inertia;
+      Body.setInertia(dragging, Infinity);
+      Body.setVelocity(dragging, { x: 0, y: 0 });
+      Body.setAngularVelocity(dragging, 0);
+    }
+  });
+  Events.on(mc, "enddrag", () => {
+    if (dragging) {
+      Body.setInertia(dragging, origInertia || 1);
+      dragging = null;
+      origInertia = null;
+    }
+  });
 
-//   // Preserve inertia during drag
-//   let dragging = null,
-//     origInertia = null;
-//   Events.on(mc, "startdrag", ({ body }) => {
-//     dragging = body;
-//     if (dragging) {
-//       origInertia = dragging.inertia;
-//       Body.setInertia(dragging, Infinity);
-//       Body.setVelocity(dragging, { x: 0, y: 0 });
-//       Body.setAngularVelocity(dragging, 0);
-//     }
-//   });
-//   Events.on(mc, "enddrag", () => {
-//     if (dragging) {
-//       Body.setInertia(dragging, origInertia || 1);
-//       dragging = null;
-//       origInertia = null;
-//     }
-//   });
+  function clamp(v, lo, hi) {
+    return Math.max(lo, Math.min(hi, v));
+  }
 
-//   function clamp(v, lo, hi) {
-//     return Math.max(lo, Math.min(hi, v));
-//   }
+  Events.on(engine, "beforeUpdate", () => {
+    if (!dragging) return;
+    const found = bodiesData.find((b) => b.body === dragging);
+    if (!found) return;
+    Body.setPosition(dragging, {
+      x: clamp(
+        dragging.position.x,
+        found.width / 2 + 4,
+        W - found.width / 2 - 4,
+      ),
+      y: clamp(
+        dragging.position.y,
+        found.height / 2 + 4,
+        H - found.height / 2 - 4,
+      ),
+    });
+    Body.setVelocity(dragging, {
+      x: clamp(dragging.velocity.x, -18, 18),
+      y: clamp(dragging.velocity.y, -18, 18),
+    });
+  });
 
-//   Events.on(engine, "beforeUpdate", () => {
-//     if (!dragging) return;
-//     const found = bodiesData.find((b) => b.body === dragging);
-//     if (!found) return;
-//     Body.setPosition(dragging, {
-//       x: clamp(dragging.position.x, found.width / 2, W - found.width / 2),
-//       y: clamp(dragging.position.y, found.height / 2, H - found.height / 2),
-//     });
-//     Body.setVelocity(dragging, {
-//       x: clamp(dragging.velocity.x, -20, 20),
-//       y: clamp(dragging.velocity.y, -20, 20),
-//     });
-//   });
+  section.addEventListener("mouseleave", () => {
+    mc.constraint.bodyB = null;
+    mc.constraint.pointB = null;
+  });
+  document.addEventListener("mouseup", () => {
+    mc.constraint.bodyB = null;
+    mc.constraint.pointB = null;
+  });
 
-//   container.addEventListener("mouseleave", () => {
-//     mc.constraint.bodyB = null;
-//     mc.constraint.pointB = null;
-//   });
-//   document.addEventListener("mouseup", () => {
-//     mc.constraint.bodyB = null;
-//     mc.constraint.pointB = null;
-//   });
+  const runner = Runner.create();
+  Runner.run(runner, engine);
 
-//   const runner = Runner.create();
-//   Runner.run(runner, engine);
-
-//   // Sync DOM positions with physics bodies every frame
-//   function syncPositions() {
-//     bodiesData.forEach(({ body, element, width, height }) => {
-//       const x = clamp(body.position.x - width / 2, 0, W - width);
-//       const y = clamp(body.position.y - height / 2, -height * 3, H - height);
-//       element.style.left = x + "px";
-//       element.style.top = y + "px";
-//       element.style.transform = `rotate(${body.angle}rad)`;
-//     });
-//     requestAnimationFrame(syncPositions);
-//   }
-//   syncPositions();
-// }
-
-// ============================================================
-// STICKY FOOTER — ExoApe layer-reveal pattern
-// ─ Footer is position:fixed at bottom (z-index 0)
-// ─ #scroll-main sits above it (z-index 1)
-// ─ #footer-spacer at end of scroll-main = footer height
-// ─ As user scrolls to page bottom, scroll-main slides off
-//   and the fixed footer is revealed underneath
-// ============================================================
+  function syncPositions() {
+    bodiesData.forEach(({ body, element, width, height }) => {
+      const x = clamp(body.position.x - width / 2, 0, W - width);
+      const y = clamp(body.position.y - height / 2, -height * 4, H - height);
+      element.style.left = x + "px";
+      element.style.top = y + "px";
+      element.style.transform = `rotate(${body.angle}rad)`;
+    });
+    requestAnimationFrame(syncPositions);
+  }
+  syncPositions();
+}
 
 (function initFooter() {
   const footer = document.getElementById("site-footer");
@@ -1193,91 +1135,46 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
   const workSticky = document.querySelector("#work-section .work-sticky");
   const backTop = document.getElementById("backToTop");
 
-  // Match spacer height to footer height so reveal is 1:1
   function syncSpacerHeight() {
-    const fh = footer.offsetHeight;
-    spacer.style.height = fh + "px";
+    spacer.style.height = footer.offsetHeight + "px";
   }
   syncSpacerHeight();
   window.addEventListener("resize", syncSpacerHeight);
 
-  // ── Footer content reveal animations ────────────────────
-  // These run once when the footer starts to become visible
-  // (i.e. when the user has scrolled most of the way through
-  //  the spacer block that sits at the bottom of scroll-main)
-
   const footerRevealTl = gsap.timeline({ paused: true });
-
   footerRevealTl
-    // eyebrow line
     .to(
       ".footer-eyebrow",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power3.out",
-      },
+      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
       0,
     )
-    // big title lines stagger
     .to(
       ".fbt-line",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.05,
-        ease: "expo.out",
-        stagger: 0.12,
-      },
+      { opacity: 1, y: 0, duration: 1.05, ease: "expo.out", stagger: 0.12 },
       0.1,
     )
-    // CTA button
+    .to(
+      ".video-container video",
+      { opacity: 1, y: 0, duration: 1.05, ease: "expo.out" },
+      0.3,
+    )
+    .to(
+      ".why-marquee",
+      { opacity: 1, y: 0, duration: 1.05, ease: "expo.out" },
+      0.4,
+    )
     .to(
       ".footer-cta-btn",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "expo.out",
-      },
+      { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" },
       0.5,
     )
-    // divider rule
-    .to(
-      ".footer-rule",
-      {
-        opacity: 1,
-        duration: 0.9,
-        ease: "power2.out",
-      },
-      0.6,
-    )
-    // info grid columns
+    .to(".footer-rule", { opacity: 1, duration: 0.9, ease: "power2.out" }, 0.6)
     .to(
       ".footer-grid",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "expo.out",
-      },
+      { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" },
       0.75,
     )
-    // bottom bar
-    .to(
-      ".footer-bar",
-      {
-        opacity: 1,
-        duration: 0.7,
-        ease: "power2.out",
-      },
-      0.9,
-    );
-
-  // ── Trigger: watch scroll-main's bottom edge ─────────────
-  // When the spacer (= footer ghost) enters the viewport,
-  // the footer is starting to be revealed → play animations.
+    .to(".footer-bar", { opacity: 1, duration: 0.7, ease: "power2.out" }, 0.9);
 
   ScrollTrigger.create({
     trigger: spacer,
@@ -1288,11 +1185,6 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
     },
   });
 
-  // ── ExoApe layer-peel: work section scales down ──────────
-  // As the user scrolls into the footer spacer zone,
-  // the work section (last real section) shrinks slightly,
-  // making it feel like the footer "peels" out from below.
-
   if (workSticky) {
     ScrollTrigger.create({
       trigger: spacer,
@@ -1301,11 +1193,9 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
       scrub: 1.4,
       onUpdate(self) {
         const p = self.progress;
-        const scale = 1 - p * 0.055;
-        const br = p * 20;
         gsap.set(workSticky, {
-          scale,
-          borderRadius: br,
+          scale: 1 - p * 0.055,
+          borderRadius: p * 20,
           transformOrigin: "bottom center",
           filter: `brightness(${1 - p * 0.18})`,
         });
@@ -1313,71 +1203,47 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
     });
   }
 
-  // ── Back to top ──────────────────────────────────────────
   if (backTop) {
     backTop.addEventListener("click", () => {
-      // Use the existing lenis instance (defined in script.js)
       if (typeof lenis !== "undefined") {
         lenis.scrollTo(0, { duration: 2 });
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     });
-
-    // Show/hide with scroll position
-    window.addEventListener("scroll", () => {
-      // backTop visibility handled through footer visibility naturally
-    });
   }
 })();
 
-// ======================================================= Theme
-// ============================================================
-// THEME SWITCHER — Ink Burst reveal with GSAP
-// Paste this at the VERY END of your script.js,
-// replacing the previous initThemeSwitcher block.
-// ============================================================
 (function initThemeSwitcher() {
   const root = document.documentElement;
   const navLogo = document.querySelector(".nav-logo");
 
-  // Inject the full-screen ink overlay
   const overlay = document.createElement("div");
   overlay.id = "theme-ink-overlay";
   document.body.appendChild(overlay);
 
-  let isLight = false;
-  let isSwitching = false;
-
+  let isLight = false,
+    isSwitching = false;
   navLogo.style.cursor = "pointer";
   navLogo.title = "Toggle theme";
 
   navLogo.addEventListener("click", () => {
     if (isSwitching) return;
     isSwitching = true;
-
-    // Origin = centre of the nav logo icon
     const rect = navLogo.getBoundingClientRect();
     const originX = rect.left + rect.width / 2;
     const originY = rect.top + rect.height / 2;
     const xPct = ((originX / window.innerWidth) * 100).toFixed(2) + "%";
     const yPct = ((originY / window.innerHeight) * 100).toFixed(2) + "%";
-
-    // Destination theme colour floods the overlay
     const nextBg = isLight ? "#050507" : "#F4F2EE";
     overlay.style.background = nextBg;
-
-    // Spawn splatter particles around the icon
     spawnInkParticles(originX, originY, nextBg);
-
-    // Max radius = viewport diagonal converted to a percentage
     const diag = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2);
     const maxR =
       ((diag / Math.min(window.innerWidth, window.innerHeight)) * 72).toFixed(
         1,
       ) + "%";
 
-    // Phase 1 — ink floods outward from icon
     gsap.fromTo(
       overlay,
       { clipPath: `circle(0% at ${xPct} ${yPct})` },
@@ -1386,11 +1252,8 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
         duration: 0.75,
         ease: "power2.inOut",
         onComplete() {
-          // Swap theme at full-screen coverage (user sees nothing)
           isLight = !isLight;
           applyTheme(isLight);
-
-          // Phase 2 — ink retracts back to icon
           gsap.to(overlay, {
             clipPath: `circle(0% at ${xPct} ${yPct})`,
             duration: 0.6,
@@ -1404,7 +1267,6 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
     );
   });
 
-  // ── Apply / remove class + save preference ──────────────
   function applyTheme(light) {
     if (light) {
       root.classList.add("light-theme");
@@ -1413,11 +1275,9 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
       root.classList.remove("light-theme");
       localStorage.setItem("theme", "dark");
     }
-    // Let ScrollTrigger recalculate after layout shift
     ScrollTrigger.refresh();
   }
 
-  // ── Splatter particles ──────────────────────────────────
   function spawnInkParticles(cx, cy, color) {
     const count = 18;
     for (let i = 0; i < count; i++) {
@@ -1426,7 +1286,6 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
       const size = Math.random() * 22 + 6;
       const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.7;
       const dist = Math.random() * 100 + 20;
-
       Object.assign(p.style, {
         width: size + "px",
         height: size + "px",
@@ -1436,7 +1295,6 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
         opacity: "0",
       });
       document.body.appendChild(p);
-
       gsap.to(p, {
         x: Math.cos(angle) * dist,
         y: Math.sin(angle) * dist,
@@ -1456,9 +1314,522 @@ ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
     }
   }
 
-  // ── Restore saved preference on page load ───────────────
   if (localStorage.getItem("theme") === "light") {
     isLight = true;
-    root.classList.add("light-theme"); // instant — no animation on load
+    root.classList.add("light-theme");
   }
+})();
+
+// (function initFooterParticles() {
+//   const footerCanvas = document.querySelector("#webgl");
+//   if (!footerCanvas) return;
+
+//   // Create circular particle texture via offscreen canvas
+//   function makeStarTexture() {
+//     const size = 64;
+//     const c = document.createElement("canvas");
+//     c.width = c.height = size;
+//     const ctx = c.getContext("2d");
+//     const gradient = ctx.createRadialGradient(
+//       size / 2,
+//       size / 2,
+//       0,
+//       size / 2,
+//       size / 2,
+//       size / 2,
+//     );
+//     gradient.addColorStop(0, "rgba(255,255,255,1)");
+//     gradient.addColorStop(0.3, "rgba(180,160,255,0.9)");
+//     gradient.addColorStop(0.7, "rgba(100,80,200,0.4)");
+//     gradient.addColorStop(1, "rgba(0,0,0,0)");
+//     ctx.fillStyle = gradient;
+//     ctx.beginPath();
+//     ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+//     ctx.fill();
+//     return new THREE.CanvasTexture(c);
+//   }
+
+//   const footerScene = new THREE.Scene();
+//   const footerSizes = {
+//     width: footerCanvas.offsetWidth || window.innerWidth,
+//     height: footerCanvas.offsetHeight || window.innerHeight,
+//   };
+
+//   const footerCamera = new THREE.PerspectiveCamera(
+//     75,
+//     footerSizes.width / footerSizes.height,
+//     0.1,
+//     100,
+//   );
+//   footerCamera.position.z = 5;
+//   footerScene.add(footerCamera);
+
+//   const footerRenderer = new THREE.WebGLRenderer({
+//     canvas: footerCanvas,
+//     alpha: true,
+//   });
+//   footerRenderer.setSize(footerSizes.width, footerSizes.height);
+//   footerRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+//   const starTexture = makeStarTexture();
+//   const geo1 = new THREE.BufferGeometry();
+//   const count1 = 1200;
+//   const pos1 = new Float32Array(count1 * 3);
+//   for (let i = 0; i < count1 * 3; i++) pos1[i] = (Math.random() - 0.5) * 14;
+//   geo1.setAttribute("position", new THREE.BufferAttribute(pos1, 3));
+//   const mat1 = new THREE.PointsMaterial({
+//     size: 0.04,
+//     map: starTexture,
+//     transparent: true,
+//     alphaTest: 0.01,
+//     depthWrite: false,
+//     sizeAttenuation: true,
+//     color: new THREE.Color(0xc8c0ff),
+//   });
+//   footerScene.add(new THREE.Points(geo1, mat1));
+
+//   // Layer 2 — mid stars (purple-blue)
+//   const geo2 = new THREE.BufferGeometry();
+//   const count2 = 400;
+//   const pos2 = new Float32Array(count2 * 3);
+//   for (let i = 0; i < count2 * 3; i++) pos2[i] = (Math.random() - 0.5) * 10;
+//   geo2.setAttribute("position", new THREE.BufferAttribute(pos2, 3));
+//   const mat2 = new THREE.PointsMaterial({
+//     size: 0.07,
+//     map: starTexture,
+//     transparent: true,
+//     alphaTest: 0.01,
+//     depthWrite: false,
+//     sizeAttenuation: true,
+//     color: new THREE.Color(0x9070ff),
+//   });
+//   footerScene.add(new THREE.Points(geo2, mat2));
+
+//   // Layer 3 — bright accent stars (cyan)
+//   const geo3 = new THREE.BufferGeometry();
+//   const count3 = 80;
+//   const pos3 = new Float32Array(count3 * 3);
+//   for (let i = 0; i < count3 * 3; i++) pos3[i] = (Math.random() - 0.5) * 8;
+//   geo3.setAttribute("position", new THREE.BufferAttribute(pos3, 3));
+//   const mat3 = new THREE.PointsMaterial({
+//     size: 0.13,
+//     map: starTexture,
+//     transparent: true,
+//     alphaTest: 0.01,
+//     depthWrite: false,
+//     sizeAttenuation: true,
+//     color: new THREE.Color(0x06d6f0),
+//   });
+//   footerScene.add(new THREE.Points(geo3, mat3));
+
+//   let mouseX = 0,
+//     mouseY = 0;
+//   window.addEventListener("mousemove", (e) => {
+//     mouseX = e.clientX / footerSizes.width - 0.5;
+//     mouseY = e.clientY / footerSizes.height - 0.5;
+//   });
+
+//   const clock = new THREE.Clock();
+
+//   function footerAnimate() {
+//     const t = clock.getElapsedTime();
+//     // Slow galaxy rotation — each layer at different speeds
+//     footerScene.children.forEach((obj, i) => {
+//       if (obj.isPoints) {
+//         obj.rotation.y = t * (0.02 + i * 0.008);
+//         obj.rotation.x = t * 0.005;
+//       }
+//     });
+//     // Subtle parallax from mouse
+//     footerCamera.position.x += (mouseX * 1.5 - footerCamera.position.x) * 0.02;
+//     footerCamera.position.y += (-mouseY * 1.5 - footerCamera.position.y) * 0.02;
+//     footerRenderer.render(footerScene, footerCamera);
+//     requestAnimationFrame(footerAnimate);
+//   }
+//   footerAnimate();
+
+//   // Resize relative to footer element
+//   const resizeObserver = new ResizeObserver(() => {
+//     footerSizes.width = footerCanvas.offsetWidth;
+//     footerSizes.height = footerCanvas.offsetHeight;
+//     footerCamera.aspect = footerSizes.width / footerSizes.height;
+//     footerCamera.updateProjectionMatrix();
+//     footerRenderer.setSize(footerSizes.width, footerSizes.height);
+//   });
+//   resizeObserver.observe(footerCanvas.parentElement);
+// })();
+
+(function () {
+  const cards = document.querySelectorAll(".hc");
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const idx = [...cards].indexOf(el);
+        setTimeout(() => {
+          el.style.transition =
+            "opacity .65s ease, transform .65s cubic-bezier(.22,.68,0,1.2), border-color .35s, box-shadow .35s";
+          el.classList.add("in-view");
+        }, idx * 90);
+        io.unobserve(el);
+      });
+    },
+    { threshold: 0.1 },
+  );
+
+  cards.forEach((c) => io.observe(c));
+
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transition = "border-color .35s, box-shadow .35s";
+      card.style.transform = `translateY(-4px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) scale(1.01)`;
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transition =
+        "transform .5s cubic-bezier(.22,.68,0,1.2), border-color .35s, box-shadow .35s";
+      card.style.transform = "translateY(0) rotateX(0) rotateY(0) scale(1)";
+    });
+  });
+})();
+
+(function () {
+  const canvas = document.getElementById("phone-canvas");
+  if (!canvas) return;
+  const parent = canvas.parentElement;
+
+  const phoneRenderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+  });
+  phoneRenderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  phoneRenderer.shadowMap.enabled = true;
+  phoneRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  phoneRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+  phoneRenderer.toneMappingExposure = 1.1;
+
+  const phoneScene = new THREE.Scene();
+  const phoneCamera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+  phoneCamera.position.set(0, 1.8, 7.5);
+  phoneCamera.lookAt(0, 0, 0);
+
+  function phoneResize() {
+    const w = parent.offsetWidth,
+      h = parent.offsetHeight;
+    phoneRenderer.setSize(w, h);
+    phoneCamera.aspect = w / h;
+    phoneCamera.updateProjectionMatrix();
+  }
+  phoneResize();
+  window.addEventListener("resize", phoneResize);
+
+  const phoneMat = new THREE.MeshStandardMaterial({
+    color: 0x7c3aed,
+    roughness: 0.28,
+    metalness: 0.55,
+  });
+  const phoneDarkMat = new THREE.MeshStandardMaterial({
+    color: 0x3b1a8a,
+    roughness: 0.4,
+    metalness: 0.4,
+  });
+  const dialMat = new THREE.MeshStandardMaterial({
+    color: 0x5b21b6,
+    roughness: 0.3,
+    metalness: 0.6,
+  });
+  const holeMat = new THREE.MeshStandardMaterial({
+    color: 0x0d0d1a,
+    roughness: 0.9,
+    metalness: 0,
+  });
+  const cordMat = new THREE.MeshStandardMaterial({
+    color: 0x4c1d95,
+    roughness: 0.7,
+    metalness: 0.1,
+  });
+
+  phoneScene.add(new THREE.AmbientLight(0x7c3aed, 0.4));
+  const keyLight = new THREE.DirectionalLight(0x06b6d4, 3.5);
+  keyLight.position.set(4, 6, 4);
+  keyLight.castShadow = true;
+  phoneScene.add(keyLight);
+  const fillLight = new THREE.DirectionalLight(0x7c3aed, 2);
+  fillLight.position.set(-4, 2, 2);
+  phoneScene.add(fillLight);
+  const rimLight = new THREE.DirectionalLight(0x06b6d4, 1.5);
+  rimLight.position.set(0, -3, -4);
+  phoneScene.add(rimLight);
+  const pointL = new THREE.PointLight(0x7c3aed, 8, 12);
+  pointL.position.set(0, 3, 2);
+  phoneScene.add(pointL);
+
+  const phone = new THREE.Group();
+  phoneScene.add(phone);
+
+  const body = new THREE.Mesh(
+    new THREE.BoxGeometry(3.2, 0.9, 2.2, 8, 4, 8),
+    phoneMat,
+  );
+  body.castShadow = true;
+  body.receiveShadow = true;
+  phone.add(body);
+
+  const slope = new THREE.Mesh(
+    new THREE.BoxGeometry(3.0, 0.12, 1.5, 6, 2, 6),
+    phoneDarkMat,
+  );
+  slope.position.set(0, 0.45, -0.1);
+  slope.rotation.x = 0.18;
+  phone.add(slope);
+
+  const dialGroup = new THREE.Group();
+  dialGroup.position.set(0.4, 0.52, 0.15);
+  dialGroup.rotation.x = -0.2;
+  phone.add(dialGroup);
+
+  dialGroup.add(
+    new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.72, 0.12, 48), dialMat),
+  );
+  const dialInner = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.52, 0.52, 0.14, 48),
+    phoneDarkMat,
+  );
+  dialInner.position.y = 0.02;
+  dialGroup.add(dialInner);
+  const dialCenter = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.18, 0.18, 0.16, 24),
+    phoneMat,
+  );
+  dialCenter.position.y = 0.03;
+  dialGroup.add(dialCenter);
+
+  for (let i = 0; i < 10; i++) {
+    const angle = (i / 10) * Math.PI * 2 - Math.PI * 0.05;
+    const hg = new THREE.Group();
+    hg.position.set(Math.sin(angle) * 0.37, 0.055, Math.cos(angle) * 0.37);
+    hg.add(
+      new THREE.Mesh(
+        new THREE.CylinderGeometry(0.065, 0.065, 0.18, 16),
+        holeMat,
+      ),
+    );
+    dialGroup.add(hg);
+  }
+  const peg = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.04, 0.04, 0.2, 12),
+    phoneDarkMat,
+  );
+  peg.position.set(0.58, 0.06, 0);
+  dialGroup.add(peg);
+
+  const handset = new THREE.Group();
+  handset.position.set(-0.55, 0.85, 0);
+  handset.rotation.z = -0.3;
+  handset.rotation.y = 0.15;
+  phone.add(handset);
+
+  const bar = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.16, 0.16, 2.6, 20),
+    phoneDarkMat,
+  );
+  bar.rotation.z = Math.PI / 2;
+  handset.add(bar);
+
+  const ear = new THREE.Mesh(
+    new THREE.SphereGeometry(0.28, 20, 16, 0, Math.PI * 2, 0, Math.PI * 0.6),
+    phoneMat,
+  );
+  ear.position.set(1.35, 0, 0);
+  ear.rotation.z = Math.PI * 0.5;
+  handset.add(ear);
+
+  const mouth = new THREE.Mesh(
+    new THREE.SphereGeometry(0.28, 20, 16, 0, Math.PI * 2, 0, Math.PI * 0.6),
+    phoneMat,
+  );
+  mouth.position.set(-1.35, 0, 0);
+  mouth.rotation.z = -Math.PI * 0.5;
+  handset.add(mouth);
+
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      if (Math.abs(i) + Math.abs(j) > 1) continue;
+      const d1 = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.025, 0.025, 0.06, 8),
+        holeMat,
+      );
+      d1.position.set(1.38 + j * 0.1, i * 0.1, 0);
+      d1.rotation.z = Math.PI / 2;
+      handset.add(d1);
+      const d2 = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.025, 0.025, 0.06, 8),
+        holeMat,
+      );
+      d2.position.set(-1.38 + j * 0.1, i * 0.1, 0);
+      d2.rotation.z = Math.PI / 2;
+      handset.add(d2);
+    }
+  }
+
+  const cordPts = [];
+  for (let t = 0; t <= 1; t += 0.02) {
+    const angle = t * 8 * Math.PI * 2;
+    const x = -0.55 + t * 0.3;
+    const y = 0.6 - t * 1.5 + Math.sin(t * Math.PI) * 0.3;
+    const z = Math.cos(angle) * 0.15 * (1 - t * 0.3);
+    const w = Math.sin(angle) * 0.15 * (1 - t * 0.3);
+    cordPts.push(new THREE.Vector3(x + z, y, w));
+  }
+  const cordCurve = new THREE.CatmullRomCurve3(cordPts);
+  phone.add(
+    new THREE.Mesh(
+      new THREE.TubeGeometry(cordCurve, 60, 0.04, 8, false),
+      cordMat,
+    ),
+  );
+
+  for (let i = 0; i < 3; i++) {
+    const btn = new THREE.Mesh(
+      new THREE.BoxGeometry(0.22, 0.08, 0.14, 2, 2, 2),
+      phoneDarkMat,
+    );
+    btn.position.set(-1.0, 0.5, 0.4 - i * 0.45);
+    phone.add(btn);
+  }
+
+  const floor = new THREE.Mesh(
+    new THREE.CircleGeometry(5, 48),
+    new THREE.ShadowMaterial({ opacity: 0.35 }),
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -0.8;
+  floor.receiveShadow = true;
+  phoneScene.add(floor);
+
+  phoneScene.add(
+    Object.assign(
+      new THREE.Mesh(
+        new THREE.CircleGeometry(1.2, 32),
+        new THREE.MeshBasicMaterial({
+          color: 0x7c3aed,
+          transparent: true,
+          opacity: 0.12,
+        }),
+      ),
+      { rotation: { x: -Math.PI / 2 }, position: { y: -0.79 } },
+    ),
+  );
+
+  phone.scale.setScalar(0.88);
+  phone.position.set(0, -0.1, 0);
+  phone.rotation.y = 0.4;
+  phone.rotation.x = 0.08;
+
+  let targetRY = 0.4,
+    targetRX = 0.08;
+  parent.addEventListener("mousemove", (e) => {
+    const r = parent.getBoundingClientRect();
+    const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    targetRY = 0.4 + mx * 0.45;
+    targetRX = 0.08 - my * 0.2;
+  });
+  parent.addEventListener("mouseleave", () => {
+    targetRY = 0.4;
+    targetRX = 0.08;
+  });
+
+  let pt = 0;
+  function phoneLoop() {
+    requestAnimationFrame(phoneLoop);
+    pt += 0.012;
+    phone.rotation.y += (targetRY - phone.rotation.y) * 0.04;
+    phone.rotation.x += (targetRX - phone.rotation.x) * 0.04;
+    phone.position.y = -0.1 + Math.sin(pt) * 0.06;
+    dialGroup.rotation.y = pt * 0.18;
+    keyLight.intensity = 3.5 + Math.sin(pt * 1.3) * 0.5;
+    pointL.intensity = 8 + Math.sin(pt * 0.9) * 2;
+    phoneRenderer.render(phoneScene, phoneCamera);
+  }
+  phoneLoop();
+})();
+
+(function initContactForm() {
+  const fm = document.getElementById("fm");
+  const cc = document.getElementById("cc");
+  if (!fm || !cc) return;
+
+  fm.addEventListener("input", () => {
+    const n = fm.value.length;
+    cc.textContent = n + " / 500";
+    cc.style.color = n > 430 ? "#f43f5e" : "#6b7280";
+  });
+
+  const sb = document.getElementById("sb");
+  const formBody = document.getElementById("form-body");
+  const ss = document.getElementById("ss");
+  const rb = document.getElementById("rb");
+
+  if (!sb || !formBody || !ss || !rb) return;
+
+  sb.addEventListener("click", () => {
+    const fields = [
+      document.getElementById("fn"),
+      document.getElementById("fe"),
+      fm,
+    ];
+    let ok = true;
+    fields.forEach((el) => {
+      if (!el || !el.value.trim()) {
+        if (el) {
+          el.style.borderColor = "#f43f5e";
+          setTimeout(() => (el.style.borderColor = ""), 1400);
+        }
+        ok = false;
+      }
+    });
+    if (!ok) return;
+
+    sb.innerHTML = "Sending…";
+    sb.disabled = true;
+    setTimeout(() => {
+      formBody.style.transition = "opacity .4s";
+      formBody.style.opacity = "0";
+      setTimeout(() => {
+        formBody.style.display = "none";
+        ss.style.display = "flex";
+        ss.style.opacity = "0";
+        ss.style.transition = "opacity .45s";
+        setTimeout(() => (ss.style.opacity = "1"), 30);
+      }, 420);
+    }, 1100);
+  });
+
+  rb.addEventListener("click", () => {
+    ss.style.opacity = "0";
+    setTimeout(() => {
+      ss.style.display = "none";
+      ["fn", "fe", "fs"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+      });
+      fm.value = "";
+      cc.textContent = "0 / 500";
+      formBody.style.display = "";
+      formBody.style.opacity = "0";
+      setTimeout(() => {
+        formBody.style.transition = "opacity .4s";
+        formBody.style.opacity = "1";
+      }, 30);
+      sb.innerHTML =
+        'Send Message <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+      sb.disabled = false;
+    }, 420);
+  });
 })();
