@@ -848,7 +848,7 @@ nav {
 }
 
 .about-card {
-  flex: 0 0 260px;
+  flex: 0 0 400px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 20px;

@@ -7,6 +7,11 @@ gsap.ticker.add((time) => {
 });
 gsap.ticker.lagSmoothing(0);
 
+VanillaTilt.init(document.querySelector(".about-card"), {
+  max: 5,
+  speed: 500,
+});
+
 const cursorDot = document.getElementById("cursor-dot");
 const cursorRing = document.getElementById("cursor-ring");
 let mouseX = 0,
