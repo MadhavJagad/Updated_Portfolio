@@ -66,6 +66,12 @@ const navTl = gsap.timeline({
   },
 });
 
+// Shery.imageEffect(".nav-image-container", {
+//   style: 5,
+//   gooey: true,
+//   // debug:true,
+// });
+
 navToggler.addEventListener("click", () => {
   if (isAnimating) return;
   isAnimating = true;
