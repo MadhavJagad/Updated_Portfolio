@@ -65,10 +65,7 @@
 
     <!-- FIXED FOOTER -->
     <footer id="site-footer">
-        <!-- <canvas id="webgl"></canvas>
-        <div class="noise"></div> -->
         <div class="footer-grain"></div>
-
         <div class="footer-top-row">
             <div class="footer-top-area">
                 <div class="footer-eyebrow">Available for Work · 2025</div>
@@ -86,10 +83,9 @@
                 </a>
             </div>
             <div class="video-container">
-                <video src="./Images/Orbit-Video.mp4" muted autoplay loop></video>
+                <video src="./Images/Orbit-Video.mp4" muted autoplay loop playsinline></video>
             </div>
         </div>
-
         <div class="why-marquee" aria-hidden="true">
             <div class="why-marquee-track" id="whyMarqueeTrack">
                 <span>50% Faster Delivery</span><span class="why-marquee-dot">◆</span>
@@ -110,9 +106,7 @@
                 <span>React · Node.js · MongoDB</span><span class="why-marquee-dot">◆</span>
             </div>
         </div>
-
         <div class="footer-rule"></div>
-
         <div class="footer-grid">
             <div class="footer-col footer-col--brand">
                 <div class="footer-logo">
@@ -125,11 +119,11 @@
             <div class="footer-col">
                 <p class="footer-col-label">Navigate</p>
                 <ul class="footer-links">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Experience</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Skills</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#tl-outer">Experience</a></li>
+                    <li><a href="#work-section">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact-section">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -144,7 +138,7 @@
                 <ul class="footer-links">
                     <li><a href="mailto:madhavjagad@gmail.com">madhavjagad@gmail.com</a></li>
                     <li><a href="tel:+919537477974">+91 9537477974</a></li>
-                    <li><a href="#">Surat, India</a></li>
+                    <li><a href="#contact-section">Surat, India</a></li>
                 </ul>
                 <div class="footer-status">
                     <span class="status-dot"></span>
@@ -152,7 +146,6 @@
                 </div>
             </div>
         </div>
-
         <div class="footer-bar">
             <span class="footer-bar-left">Built with GSAP · Three.js · Lenis</span>
             <button class="footer-back-top" id="backToTop" aria-label="Back to top">
@@ -172,10 +165,7 @@
         <header>
             <nav>
                 <div class="nav-logo"><i class="fa-solid fa-sun"></i><i class="fa-solid fa-moon"></i></div>
-                <button class="nav-toggler">
-                    <span></span>
-                    <span></span>
-                </button>
+                <button class="nav-toggler"><span></span><span></span></button>
             </nav>
             <div class="nav-content">
                 <div class="nav-bg"></div>
@@ -190,15 +180,16 @@
                             <a href="mailto:madhavjagad@gmail.com">Email</a>
                         </div>
                         <div class="nav-legal">
-                            <a href="#">Web Development</a>
-                            <a href="#">UI/UX Design</a>
-                            <a href="#">Responsive Design</a>
-                            <a href="#">Web Optimization</a>
+                            <a href="#about">Web Development</a>
+                            <a href="#about">UI/UX Design</a>
+                            <a href="#about">Responsive Design</a>
+                            <a href="#about">Web Optimization</a>
                         </div>
                     </div>
-                    <div class="nav-items-col" style="margin-right: 100px;">
+                    <div class="nav-items-col" style="margin-right:100px;">
                         <img src="https://i.pinimg.com/1200x/5f/23/1f/5f231f3d3330036034245ac90ec54a5a.jpg"
-                            alt="Nav decorative image" class="nav-image">
+                            alt="Nav decorative image" class="nav-image"
+                            style="width:100%;height:auto;object-fit:cover;border-radius:12px;">
                     </div>
                     <div class="nav-items-col">
                         <div class="nav-primary-links">
@@ -207,11 +198,11 @@
                             <a href="mailto:madhavjagad@gmail.com">Email</a>
                         </div>
                         <div class="nav-secondary-links">
-                            <a href="#">About</a>
-                            <a href="#">Contact</a>
-                            <a href="#">Experience</a>
-                            <a href="#">Projects</a>
-                            <a href="#">Skills</a>
+                            <a href="#about">About</a>
+                            <a href="#contact-section">Contact</a>
+                            <a href="#tl-outer">Experience</a>
+                            <a href="#work-section">Projects</a>
+                            <a href="#skills">Skills</a>
                         </div>
                     </div>
                 </div>
@@ -230,8 +221,8 @@
                 <p class="hero-tagline">Crafting scalable digital experiences — from pixel-perfect React UIs to robust
                     Node.js backend systems.</p>
                 <div class="hero-btns">
-                    <button class="hero-btn hero-btn--solid">View Work ↗</button>
-                    <button class="hero-btn">Get in Touch</button>
+                    <button class="hero-btn hero-btn--solid" id="heroViewWork">View Work ↗</button>
+                    <button class="hero-btn" id="heroContact">Get in Touch</button>
                 </div>
             </div>
             <div class="scroll-hint">
@@ -243,38 +234,31 @@
         <!-- About -->
         <section class="about-section" id="about" aria-labelledby="about-heading">
             <div class="text-wrapper">
-                <div class="section-eyebrow">About Me</div>
-                <h2 class="about-headline" id="about-heading">
+                <div class="section-eyebrow gsap-fade-up">About Me</div>
+                <h2 class="about-headline gsap-fade-up" id="about-heading">
                     A developer who loves turning <em>complex ideas</em> into elegant code.
                 </h2>
-                <p>I'm <strong style="color:var(--white)">Madhav Jagad</strong>, a Full Stack Developer based in Surat,
-                    India.
-                    I specialize in building responsive, high-performance web applications using
-                    <strong style="color:var(--accent)">React JS, Node.js, and MongoDB</strong>.
-                </p>
+                <p class="gsap-fade-up">I'm <strong style="color:var(--white)">Madhav Jagad</strong>, a Full Stack
+                    Developer based in Surat, India. I specialize in building responsive, high-performance web
+                    applications using <strong style="color:var(--accent)">React JS, Node.js, and MongoDB</strong>.</p>
                 <br>
-                <p style="color:var(--muted);font-size:.9rem;line-height:1.8">
-                    From architecting full-stack financial platforms to delivering complex client projects 50% ahead of
-                    schedule —
-                    I thrive in fast-paced agile environments where clean code and real impact matter.
-                    I'm passionate about bridging great design with robust engineering.
-                </p>
+                <p class="gsap-fade-up" style="color:var(--muted);font-size:.9rem;line-height:1.8">From architecting
+                    full-stack financial platforms to delivering complex client projects 50% ahead of schedule — I
+                    thrive in fast-paced agile environments where clean code and real impact matter. I'm passionate
+                    about bridging great design with robust engineering.</p>
                 <div class="about-stats" role="list">
-                    <div class="about-stat" role="listitem">
-                        <span class="about-stat-num">37+</span>
-                        <span class="about-stat-label">Projects</span>
+                    <div class="about-stat gsap-scale-in" role="listitem">
+                        <span class="about-stat-num">37+</span><span class="about-stat-label">Projects</span>
                     </div>
-                    <div class="about-stat" role="listitem">
-                        <span class="about-stat-num">1.5yr</span>
-                        <span class="about-stat-label">Experience</span>
+                    <div class="about-stat gsap-scale-in" role="listitem">
+                        <span class="about-stat-num">1.5yr</span><span class="about-stat-label">Experience</span>
                     </div>
-                    <div class="about-stat" role="listitem">
-                        <span class="about-stat-num">100%</span>
-                        <span class="about-stat-label">Dedication</span>
+                    <div class="about-stat gsap-scale-in" role="listitem">
+                        <span class="about-stat-num">100%</span><span class="about-stat-label">Dedication</span>
                     </div>
                 </div>
             </div>
-            <div class="about-card">
+            <div class="about-card gsap-fade-left">
                 <div class="about-avatar-placeholder" aria-label="Madhav Jagad profile">👨‍💻</div>
                 <hr>
                 <div>
@@ -322,11 +306,9 @@
                                     <li>Architected & delivered full-stack financial platform (H&G ChitFund) — React,
                                         Node.js, MongoDB — end to end, solo.</li>
                                     <li>RBAC with Admin, User, Employee & Manager roles plus automated financial
-                                        reporting &
-                                        payment tracking.</li>
+                                        reporting & payment tracking.</li>
                                     <li>Integrated Cashfree Payment Gateway, SmartPing SMS & Nodemailer email for
-                                        automated
-                                        payment notifications.</li>
+                                        automated payment notifications.</li>
                                 </ul>
                                 <div class="tl-badge">🏆 Promoted ahead of schedule</div>
                             </div>
@@ -348,8 +330,7 @@
                                     <li>Optimised Flow AI, SANADHUB, Indexing Sites & Doc Chat — bug fixes & scalable UI
                                         improvements.</li>
                                     <li>Integrated REST & GraphQL APIs via Apollo Client for efficient, modern data
-                                        flow.
-                                    </li>
+                                        flow.</li>
                                     <li>Delivered Cetus Central in 3 months vs. a 6-month estimate through proactive,
                                         high-velocity execution.</li>
                                 </ul>
@@ -365,11 +346,9 @@
                                 <div class="tl-rule"></div>
                                 <ul class="tl-pts">
                                     <li>Contributed to 5+ live projects — Italianska Online, Numbersring, Nalapod,
-                                        Helpora.
-                                    </li>
+                                        Helpora.</li>
                                     <li>Built pixel-perfect, cross-device responsive interfaces directly from Figma
-                                        design
-                                        handoffs.</li>
+                                        design handoffs.</li>
                                     <li>Established clean modular architecture & Git-based version control workflows in
                                         agile teams.</li>
                                 </ul>
@@ -392,11 +371,9 @@
                                     <li>Developed multiple Angular projects under senior guidance — enterprise best
                                         practices applied throughout.</li>
                                     <li>Contributed to a Dubai airline project involving large-scale enterprise
-                                        application
-                                        development.</li>
+                                        application development.</li>
                                     <li>Expanded skills into React alongside backend fundamentals for full-stack
-                                        readiness.
-                                    </li>
+                                        readiness.</li>
                                 </ul>
                             </div>
                         </div>
@@ -409,8 +386,7 @@
                                 <div class="tl-rule"></div>
                                 <ul class="tl-pts">
                                     <li>Annotated real-world websites to support developers building accurate,
-                                        consistent UI
-                                        components.</li>
+                                        consistent UI components.</li>
                                     <li>Collaborated with dev teams to improve data quality and frontend structural
                                         consistency.</li>
                                     <li>Gained foundational exposure to modern frontend structures and professional
@@ -440,10 +416,11 @@
         <section class="highlights-band" aria-labelledby="highlights-heading">
             <div class="hb-inner">
                 <div class="hb-head">
-                    <div class="section-eyebrow">Why Work With Me</div>
-                    <h2 class="hb-h2" id="highlights-heading">Built for <em>results</em>,<br>not just looks.</h2>
-                    <p class="hb-sub">A developer who writes clean, maintainable code and consistently delivers ahead of
-                        schedule.</p>
+                    <div class="section-eyebrow gsap-fade-up">Why Work With Me</div>
+                    <h2 class="hb-h2 gsap-fade-up" id="highlights-heading">Built for <em>results</em>,<br>not just
+                        looks.</h2>
+                    <p class="hb-sub gsap-fade-up">A developer who writes clean, maintainable code and consistently
+                        delivers ahead of schedule.</p>
                 </div>
                 <div class="hb-masonry" id="hbGrid">
                     <div class="hc hc--tall">
@@ -463,8 +440,7 @@
                         <span class="hc-icon">🏗️</span><span class="hc-tag">Architecture</span>
                         <div class="hc-title">Full-Stack Ownership</div>
                         <p class="hc-text">From database schema to pixel-perfect UI — architected and shipped the entire
-                            H&G
-                            ChitFund platform solo, end-to-end, in production.</p>
+                            H&G ChitFund platform solo, end-to-end, in production.</p>
                         <div class="hc-badge">🚀 Solo delivery</div>
                     </div>
                     <div class="hc">
@@ -492,8 +468,7 @@
                         <span class="hc-icon">🔐</span><span class="hc-tag hc-tag--red">Security</span>
                         <div class="hc-title">Enterprise-Grade Architecture</div>
                         <p class="hc-text">RBAC with Admin, User, Employee & Manager roles. Integrated Cashfree
-                            Payments,
-                            SMS notifications, and automated email reporting.</p>
+                            Payments, SMS notifications, and automated email reporting.</p>
                     </div>
                     <div class="hc">
                         <div class="hc-num">06</div>
@@ -501,8 +476,7 @@
                         <span class="hc-icon">🔗</span><span class="hc-tag hc-tag--purple">APIs</span>
                         <div class="hc-title">Modern API Integration</div>
                         <p class="hc-text">REST and GraphQL APIs via Apollo Client — efficient, type-safe data flows
-                            across
-                            complex frontend applications.</p>
+                            across complex frontend applications.</p>
                         <div class="hc-badge hc-badge--purple">GraphQL · REST</div>
                     </div>
                 </div>
@@ -514,14 +488,13 @@
             <div class="sticky-cards">
                 <div class="card" id="card-1">
                     <div class="col skill-card-label">
-                        <span class="eyebrow">01 / Skill</span>
+                        <span class="eyebrow" style="opacity:1;animation:none">01 / Skill</span>
                         <div>
                             <p class="title"
                                 style="background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
                                 Frontend Development</p>
                             <p class="desc" style="margin-top:.8rem">Building fast, interactive UIs with React,
-                                TypeScript &
-                                modern CSS — pixel-perfect, every time.</p>
+                                TypeScript & modern CSS — pixel-perfect, every time.</p>
                         </div>
                         <div class="pills">
                             <span class="pill"
@@ -548,14 +521,13 @@
 
                 <div class="card" id="card-2">
                     <div class="col skill-card-label">
-                        <span class="eyebrow">02 / Skill</span>
+                        <span class="eyebrow" style="opacity:1;animation:none">02 / Skill</span>
                         <div>
                             <p class="title"
                                 style="background:linear-gradient(135deg,#06b6d4,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
                                 Backend & APIs</p>
                             <p class="desc" style="margin-top:.8rem">Designing robust server-side systems, RESTful &
-                                GraphQL
-                                APIs that scale with your business needs.</p>
+                                GraphQL APIs that scale with your business needs.</p>
                         </div>
                         <div class="pills">
                             <span class="pill"
@@ -582,7 +554,7 @@
 
                 <div class="card" id="card-3">
                     <div class="col skill-card-label">
-                        <span class="eyebrow">03 / Skill</span>
+                        <span class="eyebrow" style="opacity:1;animation:none">03 / Skill</span>
                         <div>
                             <p class="title"
                                 style="background:linear-gradient(135deg,#34d399,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
@@ -595,8 +567,7 @@
                                 style="color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)">Figma</span>
                             <span class="pill"
                                 style="color:#06b6d4;border-color:rgba(6,182,212,.3);background:rgba(6,182,212,.08)">SCSS
-                                /
-                                SASS</span>
+                                / SASS</span>
                             <span class="pill"
                                 style="color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)">Animations</span>
                             <span class="pill"
@@ -613,20 +584,18 @@
 
                 <div class="card" id="card-4">
                     <div class="col skill-card-label">
-                        <span class="eyebrow">04 / Skill</span>
+                        <span class="eyebrow" style="opacity:1;animation:none">04 / Skill</span>
                         <div>
                             <p class="title"
                                 style="background:linear-gradient(135deg,#f59e0b,#f43f5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
                                 DevOps & Tools</p>
                             <p class="desc" style="margin-top:.8rem">Streamlining workflows with modern tooling — from
-                                Git
-                                version control to payment gateway integrations.</p>
+                                Git version control to payment gateway integrations.</p>
                         </div>
                         <div class="pills">
                             <span class="pill"
                                 style="color:#f59e0b;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.08)">Git
-                                /
-                                GitHub</span>
+                                / GitHub</span>
                             <span class="pill"
                                 style="color:#f43f5e;border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.08)">Cashfree
                                 API</span>
@@ -670,13 +639,13 @@
                 </div>
             </div>
             <div class="skills-title-block">
-                <div class="section-eyebrow" style="justify-content:center">Technical Expertise</div>
-                <h2 class="skills-main-h2" id="skills-grid-heading">My <span>Tech Stack</span></h2>
-                <p class="skills-sub">A curated set of technologies I use to build production-grade, scalable web
-                    applications.</p>
+                <div class="section-eyebrow gsap-fade-up" style="justify-content:center">Technical Expertise</div>
+                <h2 class="skills-main-h2 gsap-fade-up" id="skills-grid-heading">My <span>Tech Stack</span></h2>
+                <p class="skills-sub gsap-fade-up">A curated set of technologies I use to build production-grade,
+                    scalable web applications.</p>
             </div>
             <div class="skills-categories">
-                <div class="skill-cat-card" style="--cat-color:#a78bfa">
+                <div class="skill-cat-card gsap-fade-up" style="--cat-color:#a78bfa">
                     <div class="skill-cat-icon">⚛️</div>
                     <div class="skill-cat-name">Frontend</div>
                     <div class="skill-pills">
@@ -687,7 +656,7 @@
                         <span class="skill-pill">Bootstrap</span>
                     </div>
                 </div>
-                <div class="skill-cat-card" style="--cat-color:#06b6d4">
+                <div class="skill-cat-card gsap-fade-up" style="--cat-color:#06b6d4">
                     <div class="skill-cat-icon">🖥️</div>
                     <div class="skill-cat-name">Backend</div>
                     <div class="skill-pills">
@@ -697,7 +666,7 @@
                         <span class="skill-pill">Apollo Client</span><span class="skill-pill">JWT / Auth</span>
                     </div>
                 </div>
-                <div class="skill-cat-card" style="--cat-color:#34d399">
+                <div class="skill-cat-card gsap-fade-up" style="--cat-color:#34d399">
                     <div class="skill-cat-icon">🛠️</div>
                     <div class="skill-cat-name">Tools & Integrations</div>
                     <div class="skill-pills">
@@ -724,14 +693,12 @@
                                     <p class="card-tag">Full Stack / Finance</p>
                                     <p class="card-title">E-commerce Website</p>
                                     <p class="card-desc">A fully responsive e-commerce website with product listings,
-                                        cart functionality, and payment
-                                        integration.</p>
+                                        cart functionality, and payment integration.</p>
                                 </div>
                                 <div class="project-links">
-                                    <a href="under_Working.html" class="project-link" target="_blank"><i
-                                            class="fas fa-eye"></i></a>
+                                    <a href="#" class="project-link" title="View Project"><i class="fas fa-eye"></i></a>
                                     <a href="https://github.com/MadhavJagad/React-E-com.git" class="project-link"
-                                        target="_blank"><i class="fab fa-github"></i></a>
+                                        target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -744,13 +711,12 @@
                                 <div>
                                     <p class="card-tag">Frontend / AI</p>
                                     <p class="card-title">Book Store App</p>
-                                    <p class="card-desc">Online Selling and buying books platform</p>
+                                    <p class="card-desc">Online selling and buying books platform.</p>
                                 </div>
                                 <div class="project-links">
-                                    <a href="under_Working.html" class="project-link" target="_blank"><i
-                                            class="fas fa-eye"></i></a>
+                                    <a href="#" class="project-link" title="View Project"><i class="fas fa-eye"></i></a>
                                     <a href="https://github.com/MadhavJagad/Book-Store-Project" class="project-link"
-                                        target="_blank"><i class="fab fa-github"></i></a>
+                                        target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -763,12 +729,11 @@
                                 <div>
                                     <p class="card-tag">Full Stack / E-Commerce</p>
                                     <p class="card-title">Painting</p>
-                                    <p class="card-desc">Online painting buying and selling website</p>
+                                    <p class="card-desc">Online painting buying and selling website.</p>
                                 </div>
                                 <div class="project-links">
-                                    <a href="under_Working.html" target="_blank" class="project-link"><i
-                                            class="fas fa-eye"></i></a>
-                                    <a href="#" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="project-link" title="View Project"><i class="fas fa-eye"></i></a>
+                                    <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -782,14 +747,13 @@
                                     <p class="card-tag">UI / Platform</p>
                                     <p class="card-title">Weather Dashboard</p>
                                     <p class="card-desc">An interactive weather dashboard that displays current weather
-                                        and forecasts based on user
-                                        location or search.</p>
+                                        and forecasts based on user location or search.</p>
                                 </div>
                                 <div class="project-links">
                                     <a href="https://weather-checking-with-react.netlify.app/" class="project-link"
-                                        target="_blank"><i class="fas fa-eye"></i></a>
-                                    <a href="https://github.com/MadhavJagad/Practical_Works.git" target="_blank"
-                                        class="project-link"><i class="fab fa-github"></i></a>
+                                        target="_blank" title="View Project"><i class="fas fa-eye"></i></a>
+                                    <a href="https://github.com/MadhavJagad/Practical_Works.git" class="project-link"
+                                        target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -802,14 +766,14 @@
                                 <div>
                                     <p class="card-tag">Frontend / E-Commerce</p>
                                     <p class="card-title">Pokemon</p>
-                                    <p class="card-desc">An interactive website that shows the all pokemons and their
-                                        power and can be searched</p>
+                                    <p class="card-desc">An interactive website that shows all Pokémon with their power
+                                        and can be searched.</p>
                                 </div>
                                 <div class="project-links">
                                     <a href="https://catching-pokemon-react.netlify.app/" class="project-link"
-                                        target="_blank"><i class="fas fa-eye"></i></a>
+                                        target="_blank" title="View Project"><i class="fas fa-eye"></i></a>
                                     <a href="https://github.com/MadhavJagad/Pokemon.git" class="project-link"
-                                        target="_blank"><i class="fab fa-github"></i></a>
+                                        target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -843,75 +807,58 @@
                     <div class="eyebrow">Get In Touch</div>
                     <h2 class="main-h2">Let's work<br><em>together.</em></h2>
                     <p class="sub-txt">Open to freelance projects and full-time roles. Whether you have a question or
-                        just
-                        want to say hi — my inbox is always open.</p>
-
+                        just want to say hi — my inbox is always open.</p>
                     <div class="info-stack">
                         <div class="info-row">
-                            <div class="ii">
-                                <svg viewBox="0 0 24 24">
+                            <div class="ii"><svg viewBox="0 0 24 24">
                                     <path
                                         d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                     <polyline points="22,6 12,13 2,6" />
-                                </svg>
-                            </div>
+                                </svg></div>
                             <div>
-                                <div class="il">Email</div>
-                                <a href="mailto:madhavjagad@gmail.com" class="iv">madhavjagad@gmail.com</a>
+                                <div class="il">Email</div><a href="mailto:madhavjagad@gmail.com"
+                                    class="iv">madhavjagad@gmail.com</a>
                             </div>
                         </div>
                         <div class="info-row">
-                            <div class="ii">
-                                <svg viewBox="0 0 24 24">
+                            <div class="ii"><svg viewBox="0 0 24 24">
                                     <path
                                         d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.24 10a19.79 19.79 0 01-3.07-8.67A2 2 0 012.15 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-                                </svg>
-                            </div>
+                                </svg></div>
                             <div>
-                                <div class="il">Phone</div>
-                                <a href="tel:+919537477974" class="iv">+91 9537477974</a>
+                                <div class="il">Phone</div><a href="tel:+919537477974" class="iv">+91 9537477974</a>
                             </div>
                         </div>
                         <div class="info-row">
-                            <div class="ii">
-                                <svg viewBox="0 0 24 24">
+                            <div class="ii"><svg viewBox="0 0 24 24">
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                                     <circle cx="12" cy="10" r="3" />
-                                </svg>
-                            </div>
+                                </svg></div>
                             <div>
-                                <div class="il">Location</div>
-                                <span class="iv">Surat, Gujarat, India</span>
+                                <div class="il">Location</div><span class="iv">Surat, Gujarat, India</span>
                             </div>
                         </div>
                         <div class="info-row">
-                            <div class="ii">
-                                <svg viewBox="0 0 24 24">
+                            <div class="ii"><svg viewBox="0 0 24 24">
                                     <circle cx="12" cy="12" r="10" />
                                     <polyline points="12 6 12 12 16 14" />
-                                </svg>
-                            </div>
+                                </svg></div>
                             <div>
-                                <div class="il">Response Time</div>
-                                <span class="iv">Within 24 hours</span>
+                                <div class="il">Response Time</div><span class="iv">Within 24 hours</span>
                             </div>
                         </div>
                     </div>
-
                     <div class="bottom-row">
-                        <a href="https://github.com/MadhavJagad" target="_blank" class="soc">
-                            <svg viewBox="0 0 24 24">
+                        <a href="https://github.com/MadhavJagad" target="_blank" class="soc"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-                            </svg>
-                        </a>
-                        <a href="https://www.linkedin.com/in/madhav-jagad" target="_blank" class="soc">
-                            <svg viewBox="0 0 24 24">
+                            </svg></a>
+                        <a href="https://www.linkedin.com/in/madhav-jagad" target="_blank" class="soc"><svg
+                                viewBox="0 0 24 24">
                                 <path
                                     d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
                                 <circle cx="4" cy="4" r="2" />
-                            </svg>
-                        </a>
+                            </svg></a>
                         <div class="avail"><span class="adot"></span>Open to opportunities</div>
                     </div>
                 </div>
@@ -953,11 +900,9 @@
                             </div>
                         </div>
                         <div class="success-state" id="ss">
-                            <div class="scheck">
-                                <svg viewBox="0 0 24 24">
+                            <div class="scheck"><svg viewBox="0 0 24 24">
                                     <polyline points="20 6 9 17 4 12" />
-                                </svg>
-                            </div>
+                                </svg></div>
                             <div class="s-title">Message sent!</div>
                             <div class="s-sub">Thanks for reaching out.<br>Madhav will reply within 24 hours.</div>
                             <button class="reset-btn" id="rb">Send another</button>
@@ -968,7 +913,6 @@
         </section>
 
         <div id="footer-spacer"></div>
-
     </main>
 
     <!-- SCRIPTS -->
