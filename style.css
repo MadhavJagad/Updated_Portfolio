@@ -3496,3 +3496,755 @@ html.light-theme #site-footer {
   z-index: 999999 !important;
   pointer-events: none;
 }
+
+/* ── GLOBAL OVERFLOW GUARD ── */
+
+/* ── HERO SECTION ── */
+@media (max-width: 480px) {
+  .hero-name {
+    font-size: clamp(2.2rem, 14vw, 3.2rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .hero-tagline {
+    font-size: 0.78rem;
+    padding: 0 1.5rem;
+    max-width: 100%;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0 1.5rem;
+  }
+
+  .hero-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 0 1rem;
+    text-align: center;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-name {
+    font-size: clamp(2.8rem, 10vw, 4.5rem);
+  }
+
+  .hero-btns {
+    gap: 0.75rem;
+  }
+}
+
+/* ── NAVIGATION ── */
+@media (max-width: 480px) {
+  .nav-logo {
+    padding: 0.6rem;
+    font-size: 1.4rem;
+  }
+
+  .nav-toggler {
+    padding: 0.6rem;
+  }
+
+  .nav-toggler span {
+    width: 30px;
+  }
+
+  .nav-items {
+    padding: 0 1.2rem;
+    gap: 1rem;
+  }
+
+  .nav-primary-links a {
+    font-size: 2rem;
+  }
+
+  .nav-secondary-links a {
+    font-size: 1.1rem;
+  }
+
+  .nav-socials a {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .nav-items {
+    padding: 0 2rem;
+  }
+
+  .nav-primary-links a {
+    font-size: 2.2rem;
+  }
+}
+
+/* ── ABOUT SECTION ── */
+@media (max-width: 480px) {
+  .about-section {
+    padding: 5vh 5vw;
+    gap: 2rem;
+  }
+
+  .about-headline {
+    font-size: 1.3rem;
+  }
+
+  .text-wrapper p {
+    font-size: 0.85rem;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  .about-stat-num {
+    font-size: 1.5rem;
+  }
+
+  .about-stat {
+    padding: 0.7rem 0.5rem;
+  }
+
+  .about-card {
+    padding: 1.4rem;
+    gap: 1rem;
+  }
+
+  .about-avatar-placeholder {
+    height: 150px;
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .about-section {
+    padding: 6vh 6vw;
+    gap: 2.5rem;
+  }
+
+  .about-stats {
+    gap: 0.75rem;
+  }
+}
+
+/* ── TIMELINE SECTION ── */
+@media (max-width: 768px) {
+  #tl-head {
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.5rem 4vw 0;
+  }
+
+  .tl-h2 {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  #tl-stage {
+    align-items: center;
+  }
+
+  #tl-track {
+    padding: 0 4vw;
+  }
+
+  .tl-slot {
+    flex: 0 0 260px;
+    margin-right: 100px;
+  }
+
+  .tl-card {
+    padding: 1rem 1.2rem 1.2rem;
+  }
+
+  .tl-role {
+    font-size: 0.95rem;
+  }
+
+  .tl-pts li {
+    font-size: 0.74rem;
+  }
+
+  #tl-bar {
+    padding: 0 4vw 1.4rem;
+  }
+
+  #tl-hint {
+    right: 4vw;
+    bottom: 3.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tl-slot {
+    flex: 0 0 230px;
+    margin-right: 70px;
+  }
+
+  .tl-vline {
+    height: 36px;
+  }
+
+  .tl-card {
+    padding: 0.9rem 1rem 1rem;
+  }
+
+  .tl-role {
+    font-size: 0.88rem;
+  }
+
+  .tl-pts li {
+    font-size: 0.7rem;
+    line-height: 1.55;
+  }
+
+  .tl-co {
+    font-size: 0.55rem;
+  }
+
+  #tl-head {
+    padding: 1.2rem 4vw 0;
+  }
+}
+
+/* ── HIGHLIGHTS / MASONRY ── */
+@media (max-width: 480px) {
+  .highlights-band {
+    padding: 5rem 5vw;
+  }
+
+  .hb-h2 {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .hb-sub {
+    font-size: 0.82rem;
+  }
+
+  .hb-masonry {
+    columns: 1;
+    column-gap: 0;
+  }
+
+  .hc {
+    margin-bottom: 10px;
+    padding: 1.2rem;
+  }
+
+  .hc-stat-big {
+    font-size: 2.4rem;
+  }
+
+  .hc-title {
+    font-size: 0.95rem;
+  }
+
+  .hc-text {
+    font-size: 0.76rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .highlights-band {
+    padding: 5rem 5vw;
+  }
+
+  .hb-masonry {
+    columns: 2 200px;
+  }
+}
+
+/* ── STICKY SKILL CARDS ── */
+@media (max-width: 768px) {
+  .sticky-cards .card {
+    width: calc(100% - 2rem);
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sticky-cards .card .col:nth-child(1) {
+    flex: none;
+    width: 100%;
+    height: auto;
+    padding: 1.8rem 2rem;
+  }
+
+  .sticky-cards .card .col:nth-child(2) {
+    flex: none;
+    width: 100%;
+    height: 200px;
+    border-radius: 0;
+  }
+
+  .skill-card-label .title {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  .skill-card-label .pills {
+    margin-top: 1.2rem;
+    gap: 0.6rem;
+  }
+
+  .skill-card-label .pill {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sticky-cards .card .col:nth-child(1) {
+    padding: 1.4rem 1.5rem;
+  }
+
+  .sticky-cards .card .col:nth-child(2) {
+    height: 160px;
+  }
+
+  .skill-card-label .title {
+    font-size: clamp(1.2rem, 7vw, 1.5rem);
+  }
+
+  .skill-card-label .desc {
+    font-size: 0.82rem;
+  }
+}
+
+/* ── SKILLS GRID SECTION ── */
+@media (max-width: 480px) {
+  .skills-grid-section {
+    padding: 5rem 5vw;
+  }
+
+  .skills-main-h2 {
+    font-size: clamp(1.6rem, 8vw, 2.2rem);
+  }
+
+  .skills-sub {
+    font-size: 0.82rem;
+  }
+
+  .skill-cat-card {
+    padding: 1.4rem;
+  }
+
+  .skill-cat-name {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .skills-grid-section {
+    padding: 5rem 5vw;
+  }
+
+  .skills-categories {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── WORK SECTION ── */
+@media (max-width: 768px) {
+  .capsule {
+    width: 150px;
+    height: 390px;
+  }
+
+  .work-letters span {
+    font-size: 72px;
+  }
+
+  .work-card {
+    width: 280px;
+    height: 390px;
+    flex-shrink: 0;
+  }
+
+  .card-thumb {
+    height: 210px;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-desc {
+    font-size: 12px;
+  }
+
+  .cards-container {
+    padding-left: 24px;
+    gap: 20px;
+  }
+
+  .work-heading-text {
+    font-size: clamp(1rem, 4vw, 1.4rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .capsule {
+    width: 120px;
+    height: 320px;
+  }
+
+  .work-letters span {
+    font-size: 56px;
+  }
+
+  .work-card {
+    width: 240px;
+    height: 340px;
+  }
+
+  .card-thumb {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 17px;
+  }
+
+  .cards-container {
+    padding-left: 16px;
+    gap: 14px;
+  }
+
+  .work-header-label {
+    left: 4vw;
+    top: 1.8rem;
+  }
+}
+
+/* ── CONTACT SECTION ── */
+@media (max-width: 800px) {
+  #contact-section {
+    padding: 5rem 5vw;
+  }
+
+  .page {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .left {
+    padding: 2rem 4vw;
+  }
+
+  .right {
+    min-height: 520px;
+    padding: 0;
+  }
+
+  .form-panel {
+    max-width: 100%;
+    margin: 1.5rem;
+    width: calc(100% - 3rem);
+  }
+
+  .main-h2 {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+}
+
+@media (max-width: 480px) {
+  #contact-section {
+    padding: 4rem 4vw;
+  }
+
+  .left {
+    padding: 1.5rem 3vw;
+  }
+
+  .main-h2 {
+    font-size: clamp(1.6rem, 9vw, 2.4rem);
+  }
+
+  .sub-txt {
+    font-size: 0.82rem;
+  }
+
+  .info-row {
+    gap: 0.65rem;
+    padding: 0.65rem 0;
+  }
+
+  .iv {
+    font-size: 0.78rem;
+  }
+
+  .form-panel {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+    padding: 1.4rem 1.2rem 1.2rem;
+  }
+
+  .fg {
+    grid-template-columns: 1fr;
+  }
+
+  .send-btn {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.54rem;
+  }
+
+  .right {
+    min-height: 460px;
+  }
+}
+
+/* ── FOOTER ── */
+@media (max-width: 768px) {
+  #site-footer {
+    height: auto;
+    /* position: relative; */
+  }
+
+  /* #footer-spacer {
+    display: none;
+  } */
+
+  #scroll-main {
+    z-index: 1;
+  }
+
+  .footer-top-row {
+    flex-direction: column;
+    padding: 0 5vw;
+    gap: 1rem;
+  }
+
+  .footer-top-area {
+    padding: 3rem 0 0;
+    width: 100%;
+  }
+
+  .footer-big-title {
+    font-size: clamp(2.2rem, 10vw, 4rem);
+  }
+
+  .video-container {
+    display: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 24px 5vw 0;
+    gap: 24px 16px;
+  }
+
+  /* .why-marquee {
+    overflow: hidden;
+  } */
+
+  .why-marquee-track {
+    font-size: 0.58rem;
+  }
+
+  .footer-bar {
+    padding: 16px 5vw 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-top-area {
+    padding: 2rem 0 0;
+  }
+
+  .footer-big-title {
+    font-size: clamp(2rem, 13vw, 3.2rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-cta-btn {
+    padding: 11px 22px;
+    font-size: 0.62rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    padding: 20px 5vw 0;
+    gap: 20px;
+  }
+
+  .footer-eyebrow {
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+  }
+
+  .footer-big-title .fbt-line {
+    line-height: 1;
+  }
+
+  .footer-bar {
+    padding: 14px 5vw 18px;
+  }
+
+  .footer-back-top span {
+    display: none;
+  }
+
+  .footer-back-top {
+    padding: 8px 12px;
+  }
+
+  .footer-bar-left {
+    font-size: 0.48rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── TABLET-SPECIFIC ADJUSTMENTS (481–768px) ── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .about-section {
+    padding: 6vh 5vw;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #contact-section {
+    padding: 5rem 5vw;
+  }
+
+  .highlights-band {
+    padding: 6rem 5vw;
+  }
+
+  .skills-grid-section {
+    padding: 6rem 5vw;
+  }
+}
+
+/* ── SMALL LAPTOP (769–1024px) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .about-section {
+    padding: 7vh 6vw;
+    gap: 3rem;
+  }
+
+  .about-card {
+    flex: 0 0 320px;
+  }
+
+  .tl-slot {
+    flex: 0 0 270px;
+    margin-right: 120px;
+  }
+
+  .sticky-cards .card {
+    width: calc(100% - 3rem);
+  }
+
+  .sticky-cards .card .col:nth-child(2) {
+    height: 360px;
+  }
+
+  /* .work-card {
+    width: 300px;
+    height: 420px;
+  } */
+
+  .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 24px 16px;
+  }
+
+  .footer-big-title {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+  }
+}
+
+/* ── PREVENT ORPHANED ELEMENTS & OVERFLOW ── */
+@media (max-width: 768px) {
+  .hb-masonry {
+    overflow: visible;
+  }
+
+  .nav-image {
+    display: none;
+  }
+
+  .tl-pts li {
+    word-break: break-word;
+  }
+
+  .footer-links li a {
+    word-break: break-word;
+  }
+
+  /* .why-marquee {
+    overflow: hidden;
+  } */
+
+  .work-sticky {
+    overflow: hidden;
+  }
+
+  nav {
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+
+/* ── OBJECT BUBBLES (SKILL + SKILLS GRID) ── */
+@media (max-width: 480px) {
+  .object {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+/* ── SCROLL HINT POSITIONING ── */
+@media (max-width: 480px) {
+  .scroll-hint {
+    bottom: 1rem;
+  }
+
+  .scroll-line {
+    height: 32px;
+  }
+}
+
+/* ── PRELOADER — keep full viewport on mobile ── */
+@media (max-width: 480px) {
+  .preloader-counter h1 {
+    font-size: clamp(4rem, 22vw, 10rem);
+  }
+
+  .progress-bar {
+    left: 1.5rem;
+    width: calc(100% - 3rem);
+    bottom: 1.5rem;
+  }
+
+  .preloader-counter {
+    padding: 1.5rem;
+  }
+}
+
+/* ── SECTION EYEBROWS ── */
+@media (max-width: 480px) {
+  .section-eyebrow {
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+  }
+}

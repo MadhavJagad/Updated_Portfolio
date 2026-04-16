@@ -717,7 +717,76 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ─── WORK SECTION ───
+// function initWorkSection() {
+//   const workSection = document.getElementById("work-section");
+//   const workCapsule = document.getElementById("capsule");
+//   const workLetters = document.getElementById("workLetters");
+//   const workCards = document.querySelectorAll(".work-card");
+//   const workContainer = document.getElementById("cardsContainer");
+//   const workScrollHint = document.getElementById("scrollHint");
+
+//   const vw = window.innerWidth,
+//     vh = window.innerHeight;
+//   const targetW = vw * 0.96,
+//     targetH = vh * 0.92;
+
+//   gsap.set(workCards, { x: (i) => 1400 + i * 120, opacity: 0 });
+
+//   ScrollTrigger.create({
+//     trigger: workSection,
+//     start: "top top",
+//     end: "bottom bottom",
+//     scrub: 1,
+//     onUpdate(self) {
+//       const p = self.progress;
+//       const phase1 = Math.min(p / 0.35, 1);
+//       const eased1 = gsap.parseEase("power2.inOut")(phase1);
+//       const curW = gsap.utils.interpolate(200, targetW, eased1);
+//       const curH = gsap.utils.interpolate(520, targetH, eased1);
+//       const curR = gsap.utils.interpolate(999, 28, eased1);
+//       gsap.set(workCapsule, { width: curW, height: curH, borderRadius: curR });
+//       const letterOpacity = 1 - Math.min(phase1 * 1.6, 1);
+//       const letterScale = 1 + eased1 * 0.3;
+//       gsap.set(workLetters, { opacity: letterOpacity, scale: letterScale });
+//       document.querySelector(".capsule-ring").style.opacity = 1 - eased1;
+//       workScrollHint.style.opacity = 1 - Math.min(p / 0.1, 1);
+//       const phase2 = Math.max(0, Math.min((p - 0.35) / 0.15, 1));
+//       gsap.set(workContainer, { opacity: phase2 });
+//       workContainer.style.pointerEvents = phase2 > 0 ? "auto" : "none";
+//       if (p >= 0.5) {
+//         const slideP = (p - 0.5) / 0.5;
+//         const maxShift =
+//           (vw + 340 * workCards.length + 32 * (workCards.length - 1)) * 0.72;
+//         workCards.forEach((card, i) => {
+//           const cardP = Math.max(0, Math.min(slideP - i * 0.04, 1));
+//           const startX = 1400 + i * 120;
+//           const endX = -(maxShift * 0.7) - i * 372;
+//           gsap.set(card, {
+//             x: gsap.utils.interpolate(startX, endX, cardP),
+//             opacity: 1,
+//           });
+//         });
+//       } else {
+//         workCards.forEach((card, i) => gsap.set(card, { x: 1400 + i * 120 }));
+//       }
+//     },
+//   });
+// }
+
+// ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
+//   ScrollTrigger.removeEventListener("refresh", onFirstRefresh);
+//   initWorkSection();
+// });
+
+// ─── WORK SECTION (FIXED) ───
+let workSectionST = null;
+
 function initWorkSection() {
+  if (workSectionST) {
+    workSectionST.kill();
+    workSectionST = null;
+  }
+
   const workSection = document.getElementById("work-section");
   const workCapsule = document.getElementById("capsule");
   const workLetters = document.getElementById("workLetters");
@@ -725,49 +794,71 @@ function initWorkSection() {
   const workContainer = document.getElementById("cardsContainer");
   const workScrollHint = document.getElementById("scrollHint");
 
-  const vw = window.innerWidth,
-    vh = window.innerHeight;
-  const targetW = vw * 0.96,
-    targetH = vh * 0.92;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
 
-  gsap.set(workCards, { x: (i) => 1400 + i * 120, opacity: 0 });
+  // Read actual rendered card dimensions so CSS media queries are respected
+  const firstCard = workCards[0];
+  const cardW = firstCard ? firstCard.offsetWidth : 340;
+  const cardGap = vw <= 480 ? 14 : vw <= 768 ? 20 : 32;
 
-  ScrollTrigger.create({
+  const targetW = vw * 0.96;
+  const targetH = vh * 0.92;
+
+  // Read capsule's current rendered size (set by CSS media queries)
+  const startW = workCapsule ? workCapsule.offsetWidth : 200;
+  const startH = workCapsule ? workCapsule.offsetHeight : 520;
+
+  // Cards start just off the right edge of the viewport
+  const startX = (i) => vw + 40 + i * (cardW * 0.35);
+
+  gsap.set(workCards, { x: (i) => startX(i), opacity: 0 });
+
+  workSectionST = ScrollTrigger.create({
     trigger: workSection,
     start: "top top",
     end: "bottom bottom",
     scrub: 1,
     onUpdate(self) {
       const p = self.progress;
+
+      // Phase 1 (0–0.35): capsule expands
       const phase1 = Math.min(p / 0.35, 1);
       const eased1 = gsap.parseEase("power2.inOut")(phase1);
-      const curW = gsap.utils.interpolate(200, targetW, eased1);
-      const curH = gsap.utils.interpolate(520, targetH, eased1);
+      const curW = gsap.utils.interpolate(startW, targetW, eased1);
+      const curH = gsap.utils.interpolate(startH, targetH, eased1);
       const curR = gsap.utils.interpolate(999, 28, eased1);
       gsap.set(workCapsule, { width: curW, height: curH, borderRadius: curR });
+
       const letterOpacity = 1 - Math.min(phase1 * 1.6, 1);
       const letterScale = 1 + eased1 * 0.3;
       gsap.set(workLetters, { opacity: letterOpacity, scale: letterScale });
-      document.querySelector(".capsule-ring").style.opacity = 1 - eased1;
-      workScrollHint.style.opacity = 1 - Math.min(p / 0.1, 1);
+
+      const capsuleRing = document.querySelector(".capsule-ring");
+      if (capsuleRing) capsuleRing.style.opacity = String(1 - eased1);
+      workScrollHint.style.opacity = String(1 - Math.min(p / 0.1, 1));
+
+      // Phase 2 (0.35–0.50): cards fade in
       const phase2 = Math.max(0, Math.min((p - 0.35) / 0.15, 1));
       gsap.set(workContainer, { opacity: phase2 });
       workContainer.style.pointerEvents = phase2 > 0 ? "auto" : "none";
+
+      // Phase 3 (0.50–1.00): cards slide left
       if (p >= 0.5) {
         const slideP = (p - 0.5) / 0.5;
-        const maxShift =
-          (vw + 340 * workCards.length + 32 * (workCards.length - 1)) * 0.72;
+        const totalW = workCards.length * (cardW + cardGap);
+        const maxShift = vw + totalW;
+
         workCards.forEach((card, i) => {
           const cardP = Math.max(0, Math.min(slideP - i * 0.04, 1));
-          const startX = 1400 + i * 120;
-          const endX = -(maxShift * 0.7) - i * 372;
+          const endX = -(maxShift * 0.72) - i * (cardW + cardGap);
           gsap.set(card, {
-            x: gsap.utils.interpolate(startX, endX, cardP),
+            x: gsap.utils.interpolate(startX(i), endX, cardP),
             opacity: 1,
           });
         });
       } else {
-        workCards.forEach((card, i) => gsap.set(card, { x: 1400 + i * 120 }));
+        workCards.forEach((card, i) => gsap.set(card, { x: startX(i) }));
       }
     },
   });
@@ -776,6 +867,16 @@ function initWorkSection() {
 ScrollTrigger.addEventListener("refresh", function onFirstRefresh() {
   ScrollTrigger.removeEventListener("refresh", onFirstRefresh);
   initWorkSection();
+});
+
+// Re-init on resize so card widths are re-measured
+let _workResizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(_workResizeTimer);
+  _workResizeTimer = setTimeout(() => {
+    initWorkSection();
+    ScrollTrigger.refresh();
+  }, 250);
 });
 
 // ─── MATTER.JS PHYSICS (LAZY LOAD) ───
