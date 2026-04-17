@@ -1933,6 +1933,31 @@ nav {
   z-index: 2;
 }
 
+.card#card-5 {
+  background-color: var(--base-1);
+  z-index: 5;
+}
+
+.card#card-6 {
+  background-color: var(--base-2);
+  z-index: 4;
+}
+
+.card#card-7 {
+  background-color: var(--base-3);
+  z-index: 3;
+}
+
+.card#card-8 {
+  background-color: var(--base-4);
+  z-index: 2;
+}
+
+.card#card-9 {
+  background-color: var(--base-4);
+  z-index: 2;
+}
+
 .skill-card-label {
   padding: 2.5rem 3rem;
   display: flex;
@@ -2353,6 +2378,22 @@ nav {
 
 .card-5 .card-thumb {
   background: linear-gradient(135deg, #1a0a10 0%, #140810 50%, #0d0614 100%);
+}
+
+.card-6 .card-thumb {
+  background: linear-gradient(135deg, #1a0a2e 0%, #0a1a2e 50%, #0d0d20 100%);
+}
+
+.card-7 .card-thumb {
+  background: linear-gradient(135deg, #0a1a2e 0%, #061420 50%, #041020 100%);
+}
+
+.card-8 .card-thumb {
+  background: linear-gradient(135deg, #0a1a10 0%, #061810 50%, #041408 100%);
+}
+
+.card-9 .card-thumb {
+  background: linear-gradient(135deg, #1a1008 0%, #14100a 50%, #100c08 100%);
 }
 
 .card-thumb::before {
