@@ -438,11 +438,6 @@ nav {
     padding: 0 2rem;
   }
 
-  .nav-legal,
-  .nav-secondary-links {
-    display: none;
-  }
-
   .nav-items-col:nth-child(1),
   .nav-items-col:nth-child(2) {
     flex: none;
@@ -4131,6 +4126,12 @@ html.light-theme #site-footer {
 
   .skills-grid-section {
     padding: 6rem 5vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  #cursor {
+    display: none;
   }
 }
 
