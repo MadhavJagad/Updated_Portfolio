@@ -1493,7 +1493,6 @@ function setupPhysics(container, section) {
 
 // ─── CONTACT FORM ───
 (function initContactForm() {
-  // ── REPLACE THESE WITH YOUR ACTUAL EMAILJS VALUES ──
   const EMAILJS_PUBLIC_KEY = "trfVrsYLbO-8fIvlP";
   const EMAILJS_SERVICE_ID = "service_jn0kfpq";
   const EMAILJS_TEMPLATE_ID = "template_ena12if";
