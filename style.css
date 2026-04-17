@@ -4285,12 +4285,6 @@ html.light-theme #site-footer {
   }
 }
 
-@media (max-width: 1024px) {
-  #cursor {
-    display: none;
-  }
-}
-
 /* ── SMALL LAPTOP (769–1024px) ── */
 @media (min-width: 769px) and (max-width: 1024px) {
   .about-section {
@@ -4403,5 +4397,20 @@ html.light-theme #site-footer {
   .section-eyebrow {
     font-size: 0.52rem;
     letter-spacing: 0.22em;
+  }
+}
+
+@media (max-width: 1024px) {
+  #cursor {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav-col--center {
+    display: none;
+  }
+  #nav-center {
+    display: none;
   }
 }
