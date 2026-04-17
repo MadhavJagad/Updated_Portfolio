@@ -3129,14 +3129,24 @@ nav {
   overflow: hidden;
 }
 
+/* #site-footer {
+  pointer-events: all;
+  z-index: 2; 
+} */
+
 #scroll-main {
   position: relative;
   z-index: 1;
+  pointer-events: none;
+}
+
+#scroll-main > * {
+  pointer-events: all;
 }
 
 #footer-spacer {
   height: 100vh;
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 .footer-grain {

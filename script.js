@@ -1236,6 +1236,12 @@ function setupPhysics(container, section) {
   const workSticky = document.querySelector("#work-section .work-sticky");
   const backTop = document.getElementById("backToTop");
 
+  backTop.addEventListener("click", () => {
+    document.getElementById("hero-wrap").scrollIntoView({
+      behavior: "smooth",
+    });
+  });
+
   function syncSpacerHeight() {
     spacer.style.height = footer.offsetHeight + "px";
   }
