@@ -59,8 +59,8 @@ if (!isTouchDevice()) {
 }
 
 // ─── CURSOR ───
-const cursorDot = document.getElementById("cursor-dot");
-const cursorRing = document.getElementById("cursor-ring");
+// const cursorDot = document.getElementById("cursor-dot");
+// const cursorRing = document.getElementById("cursor-ring");
 let mouseX = 0,
   mouseY = 0,
   ringX = 0,
