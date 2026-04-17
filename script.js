@@ -1421,15 +1421,97 @@ function setupPhysics(container, section) {
 })();
 
 // ─── CONTACT FORM ───
+// (function initContactForm() {
+//   const fm = document.getElementById("fm");
+//   const cc = document.getElementById("cc");
+//   if (!fm || !cc) return;
+//   fm.addEventListener("input", () => {
+//     const n = fm.value.length;
+//     cc.textContent = n + " / 500";
+//     cc.style.color = n > 430 ? "#f43f5e" : "#6b7280";
+//   });
+//   const sb = document.getElementById("sb");
+//   const formBody = document.getElementById("form-body");
+//   const ss = document.getElementById("ss");
+//   const rb = document.getElementById("rb");
+//   if (!sb || !formBody || !ss || !rb) return;
+
+//   sb.addEventListener("click", () => {
+//     const fields = [
+//       document.getElementById("fn"),
+//       document.getElementById("fe"),
+//       fm,
+//     ];
+//     let ok = true;
+//     fields.forEach((el) => {
+//       if (!el || !el.value.trim()) {
+//         if (el) {
+//           el.style.borderColor = "#f43f5e";
+//           setTimeout(() => (el.style.borderColor = ""), 1400);
+//         }
+//         ok = false;
+//       }
+//     });
+//     if (!ok) return;
+//     sb.innerHTML = "Sending…";
+//     sb.disabled = true;
+//     setTimeout(() => {
+//       formBody.style.transition = "opacity .4s";
+//       formBody.style.opacity = "0";
+//       setTimeout(() => {
+//         formBody.style.display = "none";
+//         ss.style.display = "flex";
+//         ss.style.opacity = "0";
+//         ss.style.transition = "opacity .45s";
+//         setTimeout(() => (ss.style.opacity = "1"), 30);
+//       }, 420);
+//     }, 1100);
+//   });
+
+//   rb.addEventListener("click", () => {
+//     ss.style.opacity = "0";
+//     setTimeout(() => {
+//       ss.style.display = "none";
+//       ["fn", "fe", "fs"].forEach((id) => {
+//         const el = document.getElementById(id);
+//         if (el) el.value = "";
+//       });
+//       fm.value = "";
+//       cc.textContent = "0 / 500";
+//       formBody.style.display = "";
+//       formBody.style.opacity = "0";
+//       setTimeout(() => {
+//         formBody.style.transition = "opacity .4s";
+//         formBody.style.opacity = "1";
+//       }, 30);
+//       sb.innerHTML =
+//         'Send Message <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+//       sb.disabled = false;
+//     }, 420);
+//   });
+// })();
+
+// ─── CONTACT FORM ───
 (function initContactForm() {
+  // ── REPLACE THESE WITH YOUR ACTUAL EMAILJS VALUES ──
+  const EMAILJS_PUBLIC_KEY = "trfVrsYLbO-8fIvlP";
+  const EMAILJS_SERVICE_ID = "service_jn0kfpq";
+  const EMAILJS_TEMPLATE_ID = "template_ena12if";
+
+  // Init EmailJS
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
   const fm = document.getElementById("fm");
   const cc = document.getElementById("cc");
   if (!fm || !cc) return;
+
+  // Character counter
   fm.addEventListener("input", () => {
     const n = fm.value.length;
     cc.textContent = n + " / 500";
     cc.style.color = n > 430 ? "#f43f5e" : "#6b7280";
   });
+
   const sb = document.getElementById("sb");
   const formBody = document.getElementById("form-body");
   const ss = document.getElementById("ss");
@@ -1437,11 +1519,12 @@ function setupPhysics(container, section) {
   if (!sb || !formBody || !ss || !rb) return;
 
   sb.addEventListener("click", () => {
-    const fields = [
-      document.getElementById("fn"),
-      document.getElementById("fe"),
-      fm,
-    ];
+    const fnEl = document.getElementById("fn");
+    const feEl = document.getElementById("fe");
+    const fsEl = document.getElementById("fs");
+
+    // Validate required fields
+    const fields = [fnEl, feEl, fm];
     let ok = true;
     fields.forEach((el) => {
       if (!el || !el.value.trim()) {
@@ -1453,21 +1536,56 @@ function setupPhysics(container, section) {
       }
     });
     if (!ok) return;
+
+    // Show sending state
     sb.innerHTML = "Sending…";
     sb.disabled = true;
-    setTimeout(() => {
-      formBody.style.transition = "opacity .4s";
-      formBody.style.opacity = "0";
-      setTimeout(() => {
-        formBody.style.display = "none";
-        ss.style.display = "flex";
-        ss.style.opacity = "0";
-        ss.style.transition = "opacity .45s";
-        setTimeout(() => (ss.style.opacity = "1"), 30);
-      }, 420);
-    }, 1100);
+
+    // EmailJS send
+    const templateParams = {
+      from_name: fnEl.value.trim(),
+      from_email: feEl.value.trim(),
+      subject: fsEl ? fsEl.value || "Portfolio Contact" : "Portfolio Contact",
+      message: fm.value.trim(),
+      to_email: "madhavjagad@gmail.com",
+    };
+
+    emailjs
+      .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+      .then(() => {
+        // Success — show success state
+        formBody.style.transition = "opacity .4s";
+        formBody.style.opacity = "0";
+        setTimeout(() => {
+          formBody.style.display = "none";
+          ss.style.display = "flex";
+          ss.style.opacity = "0";
+          ss.style.transition = "opacity .45s";
+          setTimeout(() => (ss.style.opacity = "1"), 30);
+        }, 420);
+      })
+      .catch((error) => {
+        // Failed — show error, re-enable button
+        console.error("EmailJS error:", error);
+        sb.innerHTML = `
+          Send Message
+          <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>`;
+        sb.disabled = false;
+        // Show brief error message
+        const errMsg = document.createElement("p");
+        errMsg.textContent =
+          "Failed to send. Please try again or email directly.";
+        errMsg.style.cssText =
+          "color:#f43f5e;font-size:0.7rem;margin-top:0.5rem;font-family:var(--font-mono)";
+        sb.parentElement.appendChild(errMsg);
+        setTimeout(() => errMsg.remove(), 4000);
+      });
   });
 
+  // Reset form
   rb.addEventListener("click", () => {
     ss.style.opacity = "0";
     setTimeout(() => {
@@ -1484,8 +1602,12 @@ function setupPhysics(container, section) {
         formBody.style.transition = "opacity .4s";
         formBody.style.opacity = "1";
       }, 30);
-      sb.innerHTML =
-        'Send Message <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+      sb.innerHTML = `
+        Send Message
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>`;
       sb.disabled = false;
     }, 420);
   });
