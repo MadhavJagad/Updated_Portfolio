@@ -1,6 +1,9 @@
 gsap.registerPlugin(SplitText, CustomEase, ScrollTrigger);
 
-const lenis = new Lenis();
+const lenis = new Lenis({
+  smoothTouch: false,
+  touchMultiplier: 1,
+});
 lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => {
   lenis.raf(time * 1000);
@@ -11,6 +14,49 @@ VanillaTilt.init(document.querySelector(".about-card"), {
   max: 5,
   speed: 500,
 });
+
+// ─── CURSOR ─── (add this guard at the very top)
+const isTouchDevice = () =>
+  window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+const cursorDot = document.getElementById("cursor-dot");
+const cursorRing = document.getElementById("cursor-ring");
+
+if (!isTouchDevice()) {
+  let mouseX = 0,
+    mouseY = 0,
+    ringX = 0,
+    ringY = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + "px";
+    cursorDot.style.top = mouseY + "px";
+  });
+
+  function animateCursor() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + "px";
+    cursorRing.style.top = ringY + "px";
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document
+    .querySelectorAll(
+      "a,button,.skill-card,.project-card,.ach-card,.badge,.work-card,.hc,.tl-card,.about-stat,.skill-cat-card",
+    )
+    .forEach((el) => {
+      el.addEventListener("mouseenter", () =>
+        document.body.classList.add("hovering"),
+      );
+      el.addEventListener("mouseleave", () =>
+        document.body.classList.remove("hovering"),
+      );
+    });
+}
 
 // ─── CURSOR ───
 const cursorDot = document.getElementById("cursor-dot");
@@ -1626,10 +1672,26 @@ function setupPhysics(container, section) {
     cursor.scale = 1.6;
     setTimeout(() => (cursor.scale = 1), 200);
   });
+  // wrap.addEventListener(
+  //   "touchmove",
+  //   (e) => {
+  //     e.preventDefault();
+  //     const rect = wrap.getBoundingClientRect();
+  //     const t = e.touches[0];
+  //     mx = t.clientX - rect.left;
+  //     my = t.clientY - rect.top;
+  //     targetMouse.set(mx / W, 1 - my / H);
+  //     cursor.tx = mx;
+  //     cursor.ty = my;
+  //     targetHover = 1;
+  //     isInside = true;
+  //   },
+  //   { passive: false },
+  // );
+
   wrap.addEventListener(
     "touchmove",
     (e) => {
-      e.preventDefault();
       const rect = wrap.getBoundingClientRect();
       const t = e.touches[0];
       mx = t.clientX - rect.left;
@@ -1640,7 +1702,7 @@ function setupPhysics(container, section) {
       targetHover = 1;
       isInside = true;
     },
-    { passive: false },
+    { passive: true },
   );
   wrap.addEventListener("touchend", (e) => {
     const rect = wrap.getBoundingClientRect();

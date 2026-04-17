@@ -4402,9 +4402,10 @@ html.light-theme #site-footer {
 
 @media (max-width: 1024px) {
   #cursor {
-    display: none;
+    display: none !important;
     visibility: hidden;
     opacity: 0;
+    pointer-events: none;
   }
 }
 
