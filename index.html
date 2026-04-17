@@ -185,31 +185,34 @@
                 <div class="nav-bg"></div>
                 <div class="nav-items">
                     <div class="nav-items-col">
-                        <div class="nav-socials">
-                            <a href="https://github.com/MadhavJagad" target="_blank">GitHub</a>
-                            <a href="https://www.linkedin.com/in/madhav-jagad" target="_blank">LinkedIn</a>
-                            <a href="mailto:madhavjagad@gmail.com">Email</a>
+                        <div class="nav-primary-links">
+                            <a href="https://github.com/MadhavJagad" target="_blank">GitHub<span
+                                    class="link-arrow">↗</span></a>
+                            <a href="https://www.linkedin.com/in/madhav-jagad" target="_blank">LinkedIn <span
+                                    class="link-arrow">↗</span></a>
+                            <a href="mailto:madhavjagad@gmail.com">Email <span class="link-arrow">↗</span></a>
                         </div>
                         <div class="nav-legal">
-                            <a href="#about">Web Development</a>
-                            <a href="#about">UI/UX Design</a>
-                            <a href="#about">Responsive Design</a>
-                            <a href="#about">Web Optimization</a>
+                            <p>I create modern, user-friendly web experiences with a strong focus on UI/UX design,
+                                responsiveness, and clean
+                                development. My work ensures websites are visually appealing, high-performing, and
+                                optimized for a seamless user
+                                experience across all devices.</p>
                         </div>
                     </div>
-                    <div class="nav-items-col" style="margin-right:100px;">
-                        <div class="nav-image-container">
+                    <!-- <div class="nav-items-col" style="margin-right:100px;">
+                        <div class="nav-image-container" style=" width: 300px;height: 400px;overflow: hidden;">
                             <img src="https://i.pinimg.com/1200x/5f/23/1f/5f231f3d3330036034245ac90ec54a5a.jpg"
                                 alt="Nav decorative image" class="nav-image"
-                                style="width:100%;height:auto;object-fit:cover;border-radius:12px;">
+                                style=" width: 100%;height: 100%; object-fit: cover;">
                         </div>
+                    </div> -->
+                    <div class="nav-items-col nav-col--center">
+                        <canvas id="nav-globe-canvas"></canvas>
+                        <div class="nav-globe-glow"></div>
+                        <!-- <div class="nav-globe-label">Full Stack Developer · Surat</div> -->
                     </div>
                     <div class="nav-items-col">
-                        <div class="nav-primary-links">
-                            <a href="https://github.com/MadhavJagad" target="_blank">GitHub</a>
-                            <a href="https://www.linkedin.com/in/madhav-jagad" target="_blank">LinkedIn</a>
-                            <a href="mailto:madhavjagad@gmail.com">Email</a>
-                        </div>
                         <div class="nav-secondary-links">
                             <a href="#about">About</a>
                             <a href="#contact-section">Contact</a>
@@ -526,7 +529,7 @@
                                 style="color:#60a5fa;border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.08)">Next.js</span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" id="card-img1">
                         <img src="./Assets/Images/Frontend.jpg" alt="Frontend Development" loading="lazy" />
                     </div>
                 </div>
@@ -558,7 +561,7 @@
                                 Auth</span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" id="card-img2">
                         <img src="./Assets/Images/Backend.jpg" alt="Backend Development" loading="lazy" />
                     </div>
                 </div>
@@ -587,7 +590,7 @@
                                 style="color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)">Three.js</span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" id="card-img3">
                         <img src="./Assets/Images/UIUX.jpg" alt="UI/UX Design" loading="lazy" />
                     </div>
                 </div>
@@ -618,7 +621,7 @@
                                 / Scrum</span>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" id="card-img4">
                         <img src="./Assets/Images/Devops.jpg" alt="DevOps Tools" loading="lazy" />
                     </div>
                 </div>

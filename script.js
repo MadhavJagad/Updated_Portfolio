@@ -66,12 +66,6 @@ const navTl = gsap.timeline({
   },
 });
 
-// Shery.imageEffect(".nav-image-container", {
-//   style: 5,
-//   gooey: true,
-//   // debug:true,
-// });
-
 navToggler.addEventListener("click", () => {
   if (isAnimating) return;
   isAnimating = true;
@@ -285,6 +279,171 @@ document.addEventListener("DOMContentLoaded", () => {
     heroWrap.classList.add("loaded");
   }, "-=0.6");
 });
+
+// ─── NAV GLOBE (Three.js) ───
+(function initNavGlobe() {
+  const canvas = document.getElementById("nav-globe-canvas");
+  if (!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+  });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(300, 300);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  camera.position.z = 4.5;
+
+  const COUNT = 2200;
+  const positions = new Float32Array(COUNT * 3);
+  const colors = new Float32Array(COUNT * 3);
+  const phases = new Float32Array(COUNT);
+  const colA = new THREE.Color("#7c3aed");
+  const colB = new THREE.Color("#06b6d4");
+  const colC = new THREE.Color("#f43f5e");
+
+  for (let i = 0; i < COUNT; i++) {
+    const phi = Math.acos(-1 + (2 * i) / COUNT);
+    const theta = Math.sqrt(COUNT * Math.PI) * phi;
+    const r = 1.6 + (Math.random() - 0.5) * 0.4;
+    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+    positions[i * 3 + 2] = r * Math.cos(phi);
+    phases[i] = Math.random() * Math.PI * 2;
+    const t = Math.random();
+    const c =
+      t < 0.4
+        ? colA.clone().lerp(colB, t / 0.4)
+        : t < 0.7
+          ? colB.clone().lerp(colC, (t - 0.4) / 0.3)
+          : colC.clone().lerp(colA, (t - 0.7) / 0.3);
+    colors[i * 3] = c.r;
+    colors[i * 3 + 1] = c.g;
+    colors[i * 3 + 2] = c.b;
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+  const mat = new THREE.PointsMaterial({
+    size: 0.045,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.85,
+    sizeAttenuation: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+  const globe = new THREE.Points(geo, mat);
+  scene.add(globe);
+
+  // Inner nebula core
+  const innerGeo = new THREE.BufferGeometry();
+  const innerPos = new Float32Array(600 * 3);
+  for (let i = 0; i < 600; i++) {
+    const u = Math.random(),
+      v = Math.random();
+    const t2 = 2 * Math.PI * u,
+      p2 = Math.acos(2 * v - 1);
+    const r2 = Math.random() * 0.8 + 0.1;
+    innerPos[i * 3] = r2 * Math.sin(p2) * Math.cos(t2);
+    innerPos[i * 3 + 1] = r2 * Math.sin(p2) * Math.sin(t2);
+    innerPos[i * 3 + 2] = r2 * Math.cos(p2);
+  }
+  innerGeo.setAttribute("position", new THREE.BufferAttribute(innerPos, 3));
+  scene.add(
+    new THREE.Points(
+      innerGeo,
+      new THREE.PointsMaterial({
+        size: 0.03,
+        color: "#7c3aed",
+        transparent: true,
+        opacity: 0.4,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      }),
+    ),
+  );
+
+  // Orbital rings
+  function makeRing(count, rFn, xScale, yScale, zScale, color, opacity) {
+    const rg = new THREE.BufferGeometry();
+    const rp = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const t = (i / count) * Math.PI * 2;
+      const r = rFn(t);
+      rp[i * 3] = r * Math.cos(t) * xScale;
+      rp[i * 3 + 1] = r * Math.sin(t) * yScale;
+      rp[i * 3 + 2] = r * Math.sin(t) * zScale;
+    }
+    rg.setAttribute("position", new THREE.BufferAttribute(rp, 3));
+    scene.add(
+      new THREE.LineLoop(
+        rg,
+        new THREE.LineBasicMaterial({
+          color,
+          transparent: true,
+          opacity,
+          blending: THREE.AdditiveBlending,
+        }),
+      ),
+    );
+  }
+  makeRing(
+    400,
+    (t) => 1.9 + Math.sin(t * 7) * 0.06,
+    1,
+    0.1,
+    1,
+    "#06b6d4",
+    0.25,
+  );
+  makeRing(400, () => 1.85, 1, 0.12, 1, "#7c3aed", 0.2);
+
+  let mx = 0,
+    my = 0,
+    tX = 0,
+    tY = 0;
+  const navContent = document.querySelector(".nav-content");
+  if (navContent) {
+    navContent.addEventListener("mousemove", (e) => {
+      const r = canvas.getBoundingClientRect();
+      mx = (e.clientX - r.left) / 300 - 0.5;
+      my = (e.clientY - r.top) / 300 - 0.5;
+    });
+  }
+
+  let tick = 0;
+  function loop() {
+    requestAnimationFrame(loop);
+    tick += 0.007;
+    tX += (mx - tX) * 0.04;
+    tY += (my - tY) * 0.04;
+    globe.rotation.y = tick * 0.3 + tX * 0.8;
+    globe.rotation.x = tY * 0.5 + Math.sin(tick * 0.2) * 0.15;
+    const pos = geo.attributes.position.array;
+    for (let i = 0; i < COUNT; i++) {
+      const wave = Math.sin(tick * 1.5 + phases[i]) * 0.018;
+      const len = Math.sqrt(
+        pos[i * 3] ** 2 + pos[i * 3 + 1] ** 2 + pos[i * 3 + 2] ** 2,
+      );
+      if (len > 0) {
+        const n = (1.6 + wave) / len;
+        pos[i * 3] *= n;
+        pos[i * 3 + 1] *= n;
+        pos[i * 3 + 2] *= n;
+      }
+    }
+    geo.attributes.position.needsUpdate = true;
+    mat.opacity = 0.75 + Math.sin(tick) * 0.1;
+    renderer.render(scene, camera);
+  }
+  loop();
+})();
 
 // ─── ENHANCED GSAP SCROLL ANIMATIONS ───
 function initScrollAnimations() {
